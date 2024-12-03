@@ -1,0 +1,342 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dll
+*.dylib
+*.pyd
+
+# C extensions
+build/
+dist/
+*.egg-info/
+.eggs/
+*.o
+*.obj
+
+# Virtual Environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Environments
+.env
+.env.*
+.envrc
+venv/
+
+# pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# pyenv
+.python-version
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+.tox/
+.nox/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Cython debug symbols
+cython_debug/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff
+instance/
+.webassets-cache
+
+# Scrapy stuff
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# FastAPI
+*.db
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+._*
+.Icon?
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Thumbnails
+Thumbs.db
+ehthumbs.db
+
+# Temporary files
+*.swp
+*~
+*.tmp
+*.bak
+*.old
+*.orig
+*.rej
+*.sublime-project
+*.sublime-workspace
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+# Media
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.mp3
+*.wav
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Eclipse
+.project
+.metadata/
+.classpath
+.cproject
+.settings/
+.target
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# IntelliJ IDEA
+*.iml
+.idea/
+out/
+
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+*.sln.iml
+
+# Other IDEs and editors
+*.kate-swp
+*.swp
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components/
+
+# Compiled JavaScript files
+*.js.map
+
+# TypeScript cache
+*.tsbuildinfo
+
+# NPM package logs
+.npm/
+
+# Yarn integrity file
+.yarn-integrity
+
+# Parcel cache
+.cache/
+
+# Next.js build output
+.next/
+
+# Nuxt.js build / generate output
+.nuxt/
+dist/
+
+# Gatsby files
+.cache/
+public/
+
+# Vuepress build output
+.vuepress/dist
+
+# Dependencies
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables file
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Mac
+*.DS_Store
+
+# Cursor IDE
+.cursor/
+
+# Docker
+*.env
+docker-compose.override.yml
+.dockerignore
+
+# Pytest
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+coverage/
+
+# Profiler data
+.prof
+
+# Celery beat schedule files
+celerybeat-schedule
+celerybeat.pid
+
+# Coverage reports
+coverage*.xml
+*.cover
+
+# Binary data
+*.bin
+
+# Database files
+*.db
+*.sql
+*.sqlite
+*.sqlite3
+
+# Secrets
+secrets.yml
+secrets.json
+*.pem
+*.key
+*.crt
+*.cer
+
+# Certificates
+certs/
+
+# GPG files
+*.asc
+
+# Machine-specific files
+.vagrant/
+
+# JetBrains IDEs
+*.idea/
+
+# Local history for JetBrains IDEs
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Build directories
+build/
+cmake-build-*/
+
+# Compiled dynamic libraries
+*.dylib
+
+# C++ cache files
+*.gcno
+
+# Boost build files
+.bjam
+.build/
+
+# Vim swap files
+*.swp
+
+# Exclude compiled code
+*.class
+
+# Kotlin files
+*.kotlin_metadata
+
+# Haskell
+*.hi
+*.o
+
+# Rust
+target/
+
+# Go
+bin/
+pkg/

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Run path sanitization before commit
+python tools/git_setup.py prepare
+
+# Add sanitized files
+git add .efm_config.json
+
+# Store the exit code
+RESULT=$?
+
+# Restore development paths
+python tools/git_setup.py restore
+
+exit $RESULT 
