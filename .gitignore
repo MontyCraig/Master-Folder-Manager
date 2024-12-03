@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.dll
+*.dylib
+*.pyd
 .Python
 build/
 develop-eggs/
@@ -19,26 +22,168 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
+.coverage
+.coverage.*
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+cython_debug/
 
-# Virtual Environment
+# Virtual Environments
 venv/
 ENV/
 env/
+env.bak/
+venv.bak/
+.venv/
+.env
+.env.*
+.envrc
 
-# IDE
+# Package Management
+Pipfile.lock
+poetry.lock
+.python-version
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing and Coverage
+htmlcov/
+.cache
+.nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+coverage/
+.prof
+coverage*.xml
+
+# Documentation
+docs/_build/
+*.ipynb_checkpoints/
+*.ipynb
+
+# Web Frameworks
+instance/
+.webassets-cache
+.scrapy
+target/
+*.db
+node_modules/
+.next/
+.nuxt/
+dist/
+.cache/
+public/
+
+# Operating System
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# IDE and Editors
 .idea/
 .vscode/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.project
+.metadata/
+.classpath
+.cproject
+.settings/
+.target
+*.iml
+out/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.iml
+*.kate-swp
 
-# Local development
+# Local Development
 .env
 .efm_config.json
 local_settings.py
-
-# Operating System
-.DS_Store
-Thumbs.db
-
-# Project specific
+local_config.json
+*.local.json
 dev_paths.json
+secrets.yml
+secrets.json
+*.pem
+*.key
+*.crt
+*.cer
+certs/
+
+# History and Backups
+.history/
+.history
+*.bak
+*~
+*.old
+*.orig
+*.rej
+*.tmp
+.cursor/
+
+# Logs and Data
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.sql
+*.sqlite
+*.sqlite3
+*.bin
+celerybeat-schedule
+celerybeat.pid
+
+# Media Files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.mp3
+*.wav
+
+# Build and Compile
+*.js.map
+*.tsbuildinfo
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+build/
+cmake-build-*/
+*.gcno
+.bjam
+.build/
+*.class
+*.kotlin_metadata
+*.hi
+*.o
+target/
+bin/
+pkg/
+
+# Docker
+*.env
+docker-compose.override.yml
+.dockerignore
