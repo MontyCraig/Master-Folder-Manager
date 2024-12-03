@@ -1,5 +1,5 @@
 """
-Interactive CLI interface for Enhanced Folder Manager.
+Interactive CLI interface for Master Folder Manager.
 
 License: MetaReps Copyright 2024 - 2025
 """
@@ -172,7 +172,7 @@ def display_main_menu() -> str:
     ]
     
     console.print(Panel.fit(
-        f"[bold cyan]Enhanced Folder Manager[/bold cyan]\n"
+        f"[bold cyan]Master Folder Manager[/bold cyan]\n"
         f"[green]Current Volume: {current_vol}[/green]\n"
         "Organize and manage your files efficiently",
         border_style="blue"
@@ -377,7 +377,7 @@ def main():
                     except Exception as e:
                         rprint(f"[red]Error changing volume: {str(e)}[/red]")
             elif choice == "14":  # Exit
-                rprint("[cyan]Thank you for using Enhanced Folder Manager![/cyan]")
+                rprint("[cyan]Thank you for using Master Folder Manager![/cyan]")
                 break
                 
             if choice != "14":
