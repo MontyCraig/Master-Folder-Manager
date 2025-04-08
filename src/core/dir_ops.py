@@ -15,18 +15,40 @@ from src.core.file_ops import get_file_info
 
 logger = logging.getLogger(__name__)
 
-def ensure_master_folders() -> Dict[str, Path]:
-    """Ensure master folders exist in the configured location."""
+DEFAULT_CATEGORIES = {
+    "Documents": [".txt", ".pdf", ".doc", ".docx", ".rtf"],
+    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp"],
+    "Videos": [".mp4", ".avi", ".mov", ".wmv"],
+    "Music": [".mp3", ".wav", ".flac", ".m4a"],
+    "Downloads": [],
+    "Archives": [".zip", ".rar", ".7z", ".tar", ".gz"],
+    "Code": [".py", ".js", ".java", ".cpp", ".h", ".css", ".html"],
+    "Other": []
+}
+
+def ensure_master_folders(root_path: Optional[Path] = None) -> Dict[str, Path]:
+    """
+    Ensure master folders exist in the specified location.
+    
+    Args:
+        root_path: Optional path to create master folders. If None, uses configured location.
+    
+    Returns:
+        Dictionary mapping category names to their Path objects.
+    """
     try:
-        config = settings.load_config()
-        root = Path(config["master_folder_root"])
-        categories = config["categories"].keys()
+        if root_path is None:
+            config = settings.load_config()
+            root_path = Path(config["master_folder_root"])
+            categories = config["categories"].keys()
+        else:
+            categories = DEFAULT_CATEGORIES.keys()
         
-        root.mkdir(parents=True, exist_ok=True)
+        root_path.mkdir(parents=True, exist_ok=True)
         
         created_folders = {}
         for category in categories:
-            folder_path = root / category
+            folder_path = root_path / category
             folder_path.mkdir(exist_ok=True)
             created_folders[category] = folder_path
             
@@ -37,7 +59,16 @@ def ensure_master_folders() -> Dict[str, Path]:
         raise
 
 def analyze_directory(path: Path, include_hidden: bool = False) -> Dict[str, Any]:
-    """Analyze directory contents."""
+    """
+    Analyze directory contents.
+    
+    Args:
+        path: Directory path to analyze
+        include_hidden: Whether to include hidden files/directories
+    
+    Returns:
+        Dictionary containing analysis results
+    """
     try:
         stats = {
             "total_size": 0,
@@ -53,19 +84,25 @@ def analyze_directory(path: Path, include_hidden: bool = False) -> Dict[str, Any
                 
             info = get_file_info(item)
             
-            if info["is_file"]:
+            if not info["is_dir"]:
                 stats["file_count"] += 1
                 stats["total_size"] += info["size"]
                 ext = item.suffix.lower()
                 stats["extensions"][ext] = stats["extensions"].get(ext, 0) + 1
                 
-                category = info["category"]
+                # Determine category
+                category = "Other"
+                for cat, exts in DEFAULT_CATEGORIES.items():
+                    if ext in exts:
+                        category = cat
+                        break
+                
                 if category not in stats["by_category"]:
                     stats["by_category"][category] = {"count": 0, "total_size": 0}
                 stats["by_category"][category]["count"] += 1
                 stats["by_category"][category]["total_size"] += info["size"]
                 
-            elif info["is_dir"]:
+            else:
                 stats["dir_count"] += 1
                 
         return stats
@@ -79,10 +116,23 @@ def organize_files(
     master_dir: Optional[Path] = None,
     move_files: bool = True
 ) -> Dict[str, int]:
-    """Organize files into categories."""
+    """
+    Organize files into categories.
+    
+    Args:
+        source_dir: Source directory containing files to organize
+        master_dir: Destination directory for organized files
+        move_files: Whether to move files (True) or copy them (False)
+    
+    Returns:
+        Dictionary counting files organized into each category
+    """
     try:
         if master_dir is None:
             master_dir = settings.get_master_folder()
+        
+        # Ensure master folders exist
+        ensure_master_folders(master_dir)
             
         counts = {}
         
@@ -90,13 +140,27 @@ def organize_files(
             if not item.is_file():
                 continue
                 
-            info = get_file_info(item)
-            category = info["category"]
+            # Determine category based on extension
+            ext = item.suffix.lower()
+            category = "Other"
+            for cat, exts in DEFAULT_CATEGORIES.items():
+                if ext in exts:
+                    category = cat
+                    break
             
             dest_dir = master_dir / category
             dest_dir.mkdir(exist_ok=True)
             
             dest_path = dest_dir / item.name
+            
+            # Handle duplicate filenames
+            counter = 1
+            while dest_path.exists():
+                stem = item.stem
+                if " (copy" in stem:
+                    stem = stem[:stem.rindex(" (copy")]
+                dest_path = dest_dir / f"{stem} (copy {counter}){item.suffix}"
+                counter += 1
             
             try:
                 if move_files:
