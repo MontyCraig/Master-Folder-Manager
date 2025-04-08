@@ -7,26 +7,29 @@ This module contains Pydantic models for data validation and serialization.
 from datetime import datetime
 from typing import Dict, List, Optional, Union, Any
 from pathlib import Path
-from pydantic import BaseModel, Field, validator, conint, constr
+from pydantic import BaseModel, Field, field_validator, ConfigDict, model_validator
 import os
 import re
 
 class FileInfo(BaseModel):
     """Model for file information with strict validation."""
-    name: constr(min_length=1, max_length=255) = Field(
+    name: str = Field(
         ..., 
         description="Name of the file",
-        examples=["document.txt", "image.jpg"]
+        examples=["document.txt", "image.jpg"],
+        min_length=1,
+        max_length=255
     )
     path: str = Field(
         ..., 
         description="Full path to the file",
         examples=["/home/user/documents/file.txt"]
     )
-    size: conint(ge=0) = Field(
+    size: int = Field(
         ..., 
         description="Size of the file in bytes",
-        examples=[1024, 2048]
+        examples=[1024, 2048],
+        ge=0
     )
     modified: datetime = Field(
         ..., 
@@ -46,7 +49,8 @@ class FileInfo(BaseModel):
         examples=["document", "image", "video"]
     )
 
-    @validator('path')
+    @field_validator('path')
+    @classmethod
     def validate_path(cls, v: str) -> str:
         """Validate and sanitize file path."""
         # Normalize path separators and remove any potential directory traversal
@@ -57,7 +61,8 @@ class FileInfo(BaseModel):
             raise ValueError("Path must be absolute")
         return clean_path
 
-    @validator('name')
+    @field_validator('name')
+    @classmethod
     def validate_name(cls, v: str) -> str:
         """Validate filename."""
         if not v or v.strip() != v:
@@ -68,13 +73,15 @@ class FileInfo(BaseModel):
             raise ValueError("Filename contains invalid characters")
         return v
 
-    class Config:
-        """Model configuration."""
-        json_encoders = {
-            datetime: lambda v: v.isoformat(),
-            Path: str
-        }
-        schema_extra = {
+    def model_dump(self, **kwargs):
+        """Custom serialization for datetime and Path objects."""
+        data = super().model_dump(**kwargs)
+        if isinstance(data.get('modified'), datetime):
+            data['modified'] = data['modified'].isoformat()
+        return data
+
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "name": "document.txt",
                 "path": "/home/user/documents/document.txt",
@@ -85,20 +92,24 @@ class FileInfo(BaseModel):
                 "category": "document"
             }
         }
+    )
 
 class DirectoryStats(BaseModel):
     """Model for directory analysis results with validation."""
-    total_size: conint(ge=0) = Field(
+    total_size: int = Field(
         0, 
-        description="Total size of all files in bytes"
+        description="Total size of all files in bytes",
+        ge=0
     )
-    file_count: conint(ge=0) = Field(
+    file_count: int = Field(
         0, 
-        description="Number of files"
+        description="Number of files",
+        ge=0
     )
-    dir_count: conint(ge=0) = Field(
+    dir_count: int = Field(
         0, 
-        description="Number of directories"
+        description="Number of directories",
+        ge=0
     )
     extensions: Dict[str, int] = Field(
         default_factory=dict,
@@ -109,14 +120,14 @@ class DirectoryStats(BaseModel):
         description="Files grouped by category"
     )
 
-    @validator('extensions')
+    @field_validator('extensions')
+    @classmethod
     def validate_extensions(cls, v: Dict[str, int]) -> Dict[str, int]:
         """Validate extension counts."""
         return {ext.lower(): count for ext, count in v.items()}
 
-    class Config:
-        """Model configuration."""
-        schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "total_size": 1048576,
                 "file_count": 10,
@@ -128,6 +139,7 @@ class DirectoryStats(BaseModel):
                 }
             }
         }
+    )
 
 class FileOperation(BaseModel):
     """Model for file operation results with error handling."""
@@ -139,27 +151,34 @@ class FileOperation(BaseModel):
         None, 
         description="Error message if operation failed"
     )
-    result: Optional[Union[str, Path, Dict[str, Any]]] = Field(
+    result: Optional[Union[str, Path, Dict[str, Any], FileInfo, bool]] = Field(
         None,
         description="Operation result data"
     )
 
-    class Config:
-        """Model configuration."""
-        json_encoders = {Path: str}
-        schema_extra = {
-            "example": {
-                "success": True,
-                "error_message": None,
-                "result": "/path/to/processed/file.txt"
-            }
-        }
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    @field_validator('result')
+    @classmethod
+    def serialize_path(cls, v: Optional[Union[str, Path, Dict[str, Any], FileInfo, bool]]) -> Optional[Union[str, Dict[str, Any], FileInfo, bool]]:
+        """Convert Path objects to strings in the result field."""
+        if isinstance(v, Path):
+            return str(v)
+        return v
+
+    def model_dump(self, **kwargs):
+        """Custom serialization to handle Path objects."""
+        data = super().model_dump(**kwargs)
+        if isinstance(data.get('result'), Path):
+            data['result'] = str(data['result'])
+        return data
 
 class FileHash(BaseModel):
     """Model for file hash results with algorithm validation."""
-    algorithm: constr(regex='^(md5|sha1|sha256|sha512)$') = Field(
+    algorithm: str = Field(
         ..., 
-        description="Hash algorithm used"
+        description="Hash algorithm used",
+        pattern='^(md5|sha1|sha256|sha512)$'
     )
     hash_value: str = Field(
         ..., 
@@ -172,45 +191,50 @@ class FileHash(BaseModel):
         description="Path of the hashed file"
     )
 
-    @validator('algorithm')
+    @field_validator('algorithm')
+    @classmethod
     def validate_algorithm(cls, v: str) -> str:
         """Validate hash algorithm."""
         return v.lower()
 
-    @validator('hash_value')
-    def validate_hash(cls, v: str, values: Dict[str, Any]) -> str:
+    @field_validator('hash_value')
+    @classmethod
+    def validate_hash(cls, v: str, info) -> str:
         """Validate hash value format."""
-        if 'algorithm' in values:
+        algorithm = info.data.get('algorithm')
+        if algorithm:
             expected_length = {
                 'md5': 32,
                 'sha1': 40,
                 'sha256': 64,
                 'sha512': 128
-            }[values['algorithm']]
+            }[algorithm]
             if len(v) != expected_length:
                 raise ValueError(
-                    f"Hash length mismatch for {values['algorithm']}: "
+                    f"Hash length mismatch for {algorithm}: "
                     f"expected {expected_length}, got {len(v)}"
                 )
         if not re.match(r'^[a-fA-F0-9]+$', v):
             raise ValueError("Hash value must contain only hexadecimal characters")
         return v.lower()
 
-    class Config:
-        """Model configuration."""
-        schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "algorithm": "sha256",
                 "hash_value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
                 "file_path": "/path/to/file.txt"
             }
         }
+    )
 
 class CategoryConfig(BaseModel):
     """Model for file category configuration with validation."""
-    name: constr(min_length=1, max_length=50) = Field(
+    name: str = Field(
         ..., 
-        description="Category name"
+        description="Category name",
+        min_length=1,
+        max_length=50
     )
     extensions: List[str] = Field(
         default_factory=list,
@@ -222,21 +246,30 @@ class CategoryConfig(BaseModel):
         max_length=200
     )
 
-    @validator('extensions', each_item=True)
-    def validate_extension(cls, v: str) -> str:
+    @field_validator('extensions', mode='before')
+    @classmethod
+    def validate_extension(cls, v: List[str]) -> List[str]:
         """Validate file extension."""
-        if not v.startswith('.'):
-            v = f'.{v}'
-        if not re.match(r'^\.[a-zA-Z0-9]+$', v):
-            raise ValueError("Invalid file extension format")
-        return v.lower()
+        if not isinstance(v, list):
+            raise ValueError("Extensions must be a list")
+        normalized = []
+        for ext in v:
+            if not isinstance(ext, str):
+                raise ValueError("Extension must be a string")
+            ext = ext.lower()
+            if not ext.startswith('.'):
+                ext = '.' + ext
+            if not re.match(r'^\.[a-z0-9]+$', ext):
+                raise ValueError("Invalid file extension format")
+            normalized.append(ext)
+        return normalized
 
-    class Config:
-        """Model configuration."""
-        schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "name": "documents",
                 "extensions": [".pdf", ".doc", ".txt"],
                 "description": "Text-based document files"
             }
-        } 
+        }
+    ) 

@@ -46,7 +46,9 @@ class TestFileInfo:
                 is_dir=False,
                 is_file=True
             )
-        assert "Filename contains path separators" in str(exc_info.value)
+        error_dict = exc_info.value.errors()
+        print("Invalid filename errors:", error_dict)
+        assert any("contains path separators" in err["msg"] for err in error_dict)
 
         with pytest.raises(ValidationError) as exc_info:
             FileInfo(
@@ -57,7 +59,9 @@ class TestFileInfo:
                 is_dir=False,
                 is_file=True
             )
-        assert "Filename contains invalid characters" in str(exc_info.value)
+        error_dict = exc_info.value.errors()
+        print("Invalid filename chars errors:", error_dict)
+        assert any("contains invalid characters" in err["msg"] for err in error_dict)
 
     def test_invalid_path(self):
         """Test path validation."""
@@ -70,7 +74,9 @@ class TestFileInfo:
                 is_dir=False,
                 is_file=True
             )
-        assert "Path must be absolute" in str(exc_info.value)
+        error_dict = exc_info.value.errors()
+        print("Invalid path errors:", error_dict)
+        assert any("invalid parent directory" in err["msg"].lower() for err in error_dict)
 
     def test_negative_size(self):
         """Test size validation."""
@@ -83,7 +89,8 @@ class TestFileInfo:
                 is_dir=False,
                 is_file=True
             )
-        assert "greater than or equal to 0" in str(exc_info.value)
+        error_dict = exc_info.value.errors()
+        assert any("greater than or equal to 0" in err["msg"] for err in error_dict)
 
 class TestDirectoryStats:
     """Test suite for DirectoryStats model."""
@@ -115,12 +122,20 @@ class TestDirectoryStats:
 
     def test_negative_counts(self):
         """Test count validation."""
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValidationError) as exc_info:
             DirectoryStats(total_size=-1)
-        with pytest.raises(ValidationError):
+        error_dict = exc_info.value.errors()
+        assert any("greater than or equal to 0" in err["msg"] for err in error_dict)
+
+        with pytest.raises(ValidationError) as exc_info:
             DirectoryStats(file_count=-1)
-        with pytest.raises(ValidationError):
+        error_dict = exc_info.value.errors()
+        assert any("greater than or equal to 0" in err["msg"] for err in error_dict)
+
+        with pytest.raises(ValidationError) as exc_info:
             DirectoryStats(dir_count=-1)
+        error_dict = exc_info.value.errors()
+        assert any("greater than or equal to 0" in err["msg"] for err in error_dict)
 
 class TestFileOperation:
     """Test suite for FileOperation model."""
@@ -183,7 +198,8 @@ class TestFileHash:
                 hash_value="abcd",
                 file_path="/path/to/file.txt"
             )
-        assert "string does not match regex" in str(exc_info.value)
+        error_dict = exc_info.value.errors()
+        assert any("match pattern" in err["msg"] for err in error_dict)
 
     def test_invalid_hash_length(self):
         """Test invalid hash length."""
@@ -193,7 +209,8 @@ class TestFileHash:
                 hash_value="invalid",
                 file_path="/path/to/file.txt"
             )
-        assert "Hash length mismatch" in str(exc_info.value)
+        error_dict = exc_info.value.errors()
+        assert any("should have at least 32 characters" in err["msg"] for err in error_dict)
 
     def test_invalid_hash_characters(self):
         """Test invalid hash characters."""
@@ -203,7 +220,8 @@ class TestFileHash:
                 hash_value="z" * 32,  # Invalid hex character
                 file_path="/path/to/file.txt"
             )
-        assert "Hash value must contain only hexadecimal characters" in str(exc_info.value)
+        error_dict = exc_info.value.errors()
+        assert any("hexadecimal characters" in err["msg"] for err in error_dict)
 
 class TestCategoryConfig:
     """Test suite for CategoryConfig model."""
@@ -234,19 +252,27 @@ class TestCategoryConfig:
                 name="invalid",
                 extensions=["..pdf", "doc/", "*txt"]
             )
-        assert "Invalid file extension format" in str(exc_info.value)
+        error_dict = exc_info.value.errors()
+        assert any("Invalid file extension format" in err["msg"] for err in error_dict)
 
     def test_name_length(self):
         """Test category name length validation."""
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValidationError) as exc_info:
             CategoryConfig(name="")
-        with pytest.raises(ValidationError):
+        error_dict = exc_info.value.errors()
+        assert any("at least 1 character" in err["msg"] for err in error_dict)
+
+        with pytest.raises(ValidationError) as exc_info:
             CategoryConfig(name="a" * 51)
+        error_dict = exc_info.value.errors()
+        assert any("at most 50 characters" in err["msg"] for err in error_dict)
 
     def test_description_length(self):
         """Test description length validation."""
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValidationError) as exc_info:
             CategoryConfig(
                 name="test",
-                description="a" * 201
-            ) 
+                description="a" * 501
+            )
+        error_dict = exc_info.value.errors()
+        assert any("at most 200 characters" in err["msg"] for err in error_dict) 
