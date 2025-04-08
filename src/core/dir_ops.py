@@ -84,9 +84,16 @@ def analyze_directory(path: Path, include_hidden: bool = False) -> Dict[str, Any
                 
             info = get_file_info(item)
             
-            if not info["is_dir"]:
+            # Handle FileOperation object properly
+            if not info.success or not info.result:
+                logger.warning(f"Could not get info for {item}: {info.error_message}")
+                continue
+                
+            file_info = info.result
+            
+            if not file_info.is_dir:
                 stats["file_count"] += 1
-                stats["total_size"] += info["size"]
+                stats["total_size"] += file_info.size
                 ext = item.suffix.lower()
                 stats["extensions"][ext] = stats["extensions"].get(ext, 0) + 1
                 
@@ -100,7 +107,7 @@ def analyze_directory(path: Path, include_hidden: bool = False) -> Dict[str, Any
                 if category not in stats["by_category"]:
                     stats["by_category"][category] = {"count": 0, "total_size": 0}
                 stats["by_category"][category]["count"] += 1
-                stats["by_category"][category]["total_size"] += info["size"]
+                stats["by_category"][category]["total_size"] += file_info.size
                 
             else:
                 stats["dir_count"] += 1

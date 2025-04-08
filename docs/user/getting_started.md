@@ -5,6 +5,9 @@ Enhanced Folder Manager is a powerful tool for organizing and managing your file
 
 ## Prerequisites
 - Python 3.8 or higher
+- Pydantic v2.0.0 or higher
+- Click 8.0.0 or higher
+- Rich 13.0.0 or higher
 - pip (Python package installer)
 - Basic knowledge of command line operations
 
@@ -17,8 +20,15 @@ pip install enhanced-folder-manager
 
 ### From source
 ```bash
-git clone https://github.com/yourusername/master-folder-manager.git
+git clone https://github.com/MontyCraig/Master-Folder-Manager.git
 cd master-folder-manager
+
+# Create a virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies and the package
+pip install -r requirements.txt
 pip install -e .
 ```
 

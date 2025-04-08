@@ -71,11 +71,11 @@ def test_build_directory_tree(tmp_path):
     
     tree = build_directory_tree(tmp_path)
     
-    assert "dir1" in tree
-    assert "dir2" in tree
-    assert "subdir" in tree["dir2"]
-    assert "file1.txt" in tree["dir1"]
-    assert "file2.txt" in tree["dir2"]["subdir"]
+    assert "dir1" in tree["children"]
+    assert "dir2" in tree["children"]
+    assert "subdir" in tree["children"]["dir2"]["children"]
+    assert "file1.txt" in tree["children"]["dir1"]["children"]
+    assert "file2.txt" in tree["children"]["dir2"]["children"]["subdir"]["children"]
 
 def test_build_directory_tree_with_filters(tmp_path):
     """Test directory tree building with file filters."""
@@ -87,6 +87,6 @@ def test_build_directory_tree_with_filters(tmp_path):
     # Test with extension filter
     tree = build_directory_tree(tmp_path, include_patterns=["*.txt", "*.py"])
     
-    assert "test.txt" in tree
-    assert "test.py" in tree
-    assert "test.jpg" not in tree 
+    assert "test.txt" in tree["children"]
+    assert "test.py" in tree["children"]
+    assert "test.jpg" not in tree["children"] 

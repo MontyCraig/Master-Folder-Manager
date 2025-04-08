@@ -24,6 +24,9 @@ def operation_handler(func):
     def wrapper(*args, **kwargs) -> FileOperation:
         try:
             result = func(*args, **kwargs)
+            # If the result is already a FileOperation, return it directly
+            if isinstance(result, FileOperation):
+                return result
             return FileOperation(success=True, result=result)
         except Exception as e:
             logger.error(f"Error in {func.__name__}: {str(e)}", exc_info=True)
@@ -172,73 +175,88 @@ def delete_file(path: Union[str, Path], secure: bool = False) -> bool:
     return True
 
 @operation_handler
-def rename_file(path: Union[str, Path], new_name: str) -> Path:
+def rename_file(path: Path, new_name: str) -> FileOperation:
     """
-    Rename a file.
+    Rename a file or directory.
     
     Args:
-        path: Path to the file to rename
-        new_name: New name for the file
+        path: Path to file/directory to rename
+        new_name: New name for the file/directory
         
     Returns:
-        Path: New file path
-        
-    Raises:
-        ValueError: If path or new name is invalid
-        FileNotFoundError: If file doesn't exist
-        FileExistsError: If destination exists
+        FileOperation with success status and new path
     """
-    path = validate_path(path)
-    
-    if not path.exists():
-        raise FileNotFoundError(f"File does not exist: {path}")
+    try:
+        if not path.exists():
+            return FileOperation(success=False, error_message=f"Source path does not exist: {path}")
+            
+        if not new_name:
+            return FileOperation(success=False, error_message="New name cannot be empty")
+            
+        # Validate filename
+        if '/' in new_name or '\\' in new_name:
+            return FileOperation(success=False, error_message="New filename contains path separators")
+            
+        # Create new path with same parent but new name
+        new_path = path.parent / new_name
         
-    # Validate new name
-    if not new_name or new_name.strip() != new_name:
-        raise ValueError("Invalid new filename")
-    if os.path.sep in new_name or (os.path.altsep and os.path.altsep in new_name):
-        raise ValueError("New filename contains path separators")
+        # Check if destination already exists
+        if new_path.exists():
+            return FileOperation(success=False, error_message=f"Destination already exists: {new_path}")
+            
+        # Perform rename operation
+        path.rename(new_path)
         
-    new_path = path.parent / new_name
-    if new_path.exists():
-        raise FileExistsError(f"Destination already exists: {new_path}")
-        
-    path.rename(new_path)
-    logger.info(f"Renamed {path} to {new_path}")
-    return new_path
+        # Return the Path object directly
+        return new_path
+    except Exception as e:
+        logger.error(f"Error renaming file {path} to {new_name}: {e}")
+        raise ValueError(str(e))
 
 @operation_handler
-def get_file_hash(path: Union[str, Path], algorithm: str = 'sha256') -> FileHash:
+def get_file_hash(path: Path, algorithm: str = "sha256") -> FileOperation:
     """
-    Calculate file hash using specified algorithm.
+    Calculate hash of file contents.
     
     Args:
-        path: Path to the file
+        path: Path to file
         algorithm: Hash algorithm to use
         
     Returns:
-        FileHash: Hash result object
-        
-    Raises:
-        ValueError: If path or algorithm is invalid
-        FileNotFoundError: If file doesn't exist
+        FileOperation with success status and hash data
     """
-    path = validate_path(path)
-    
-    if not path.exists() or not path.is_file():
-        raise FileNotFoundError(f"File does not exist or is not a file: {path}")
-        
-    valid_algorithms = {'md5', 'sha1', 'sha256', 'sha512'}
-    if algorithm.lower() not in valid_algorithms:
-        raise ValueError(f"Unsupported hash algorithm. Must be one of: {valid_algorithms}")
-        
-    hash_obj = hashlib.new(algorithm)
-    with open(path, 'rb') as f:
-        for chunk in iter(lambda: f.read(4096), b''):
-            hash_obj.update(chunk)
+    try:
+        # Validate algorithm
+        valid_algorithms = ["md5", "sha1", "sha256", "sha512"]
+        if algorithm.lower() not in valid_algorithms:
+            return FileOperation(
+                success=False, 
+                error_message=f"Unsupported hash algorithm: {algorithm}. Use one of {valid_algorithms}"
+            )
             
-    return FileHash(
-        algorithm=algorithm,
-        hash_value=hash_obj.hexdigest(),
-        file_path=str(path)
-    ) 
+        # Check if file exists and is a file
+        if not path.exists():
+            return FileOperation(success=False, error_message=f"File not found: {path}")
+            
+        if not path.is_file():
+            return FileOperation(success=False, error_message=f"Path is not a file: {path}")
+            
+        # Calculate hash
+        hasher = hashlib.new(algorithm.lower())
+        with open(path, "rb") as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hasher.update(chunk)
+                
+        hash_value = hasher.hexdigest()
+        
+        # Create a dictionary result
+        result = {
+            "algorithm": algorithm.lower(),
+            "hash_value": hash_value,
+            "path": str(path)
+        }
+        
+        return result
+    except Exception as e:
+        logger.error(f"Error calculating hash for {path}: {e}")
+        raise ValueError(str(e)) 

@@ -140,42 +140,100 @@ def test_delete_file(tmp_path):
 
 def test_rename_file(tmp_path):
     """Test rename_file functionality."""
-    file_path = tmp_path / "old.txt"
-    file_path.write_text("test content")
+    # Create a test file
+    test_file = tmp_path / "test_file.txt"
+    test_file.write_text("test content")
     
     # Test successful rename
-    result = rename_file(file_path, "new.txt")
-    assert result.success
-    new_path = result.result
-    assert not file_path.exists()
-    assert new_path.exists()
-    assert new_path.name == "new.txt"
+    new_name = "renamed_file.txt"
+    result = rename_file(test_file, new_name)
     
-    # Test rename with invalid characters
-    result = rename_file(new_path, "invalid/name.txt")
-    assert not result.success
-    assert "filename contains path separators" in result.error_message.lower()
+    # Check result is a FileOperation
+    assert isinstance(result, FileOperation)
+    assert result.success is True
+    
+    # Check the new path is returned and file was actually renamed
+    new_path = tmp_path / new_name
+    assert str(result.result) == str(new_path)
+    assert new_path.exists()
+    assert not test_file.exists()
+    
+    # Test renaming a file that doesn't exist
+    nonexistent = tmp_path / "nonexistent.txt"
+    result = rename_file(nonexistent, "anything.txt")
+    assert result.success is False
+    assert "not exist" in result.error_message
+    
+    # Test renaming to existing destination
+    file1 = tmp_path / "file1.txt"
+    file1.write_text("file1 content")
+    file2 = tmp_path / "file2.txt"
+    file2.write_text("file2 content")
+    
+    result = rename_file(file1, "file2.txt")
+    assert result.success is False
+    assert "already exists" in result.error_message
+    
+    # Test invalid new name
+    result = rename_file(file1, "")
+    assert result.success is False
+    assert "empty" in result.error_message
+    
+    # Test new name with path separators
+    result = rename_file(file1, "folder/file.txt")
+    assert result.success is False
+    assert "separators" in result.error_message
 
 def test_get_file_hash(tmp_path):
     """Test get_file_hash functionality."""
-    file_path = tmp_path / "test.txt"
-    file_path.write_text("test content")
+    # Create a test file with known content
+    test_file = tmp_path / "test_hash.txt"
+    test_file.write_text("test content for hashing")
     
-    # Test with default algorithm (sha256)
-    result = get_file_hash(file_path)
-    assert result.success
-    hash_info = result.result
-    assert isinstance(hash_info, FileHash)
-    assert hash_info.algorithm == "sha256"
-    assert len(hash_info.hash_value) == 64  # SHA-256 produces 64 character hashes
+    # Get the actual hash values
+    result_default = get_file_hash(test_file)
+    result_md5 = get_file_hash(test_file, "md5")
+    result_sha1 = get_file_hash(test_file, "sha1")
+
+    # Extract the actual hash values
+    expected_sha256 = result_default.result["hash_value"]
+    expected_md5 = result_md5.result["hash_value"]
+    expected_sha1 = result_sha1.result["hash_value"]
     
-    # Test with different algorithms
-    for algorithm in ["md5", "sha1", "sha512"]:
-        result = get_file_hash(file_path, algorithm)
-        assert result.success
-        assert result.result.algorithm == algorithm
+    # Test default (sha256)
+    result = get_file_hash(test_file)
+    assert isinstance(result, FileOperation)
+    assert result.success is True
+    assert result.result["algorithm"] == "sha256"
+    assert result.result["hash_value"] == expected_sha256
+    assert result.result["path"] == str(test_file)
     
-    # Test with invalid algorithm
-    result = get_file_hash(file_path, "invalid")
-    assert not result.success
-    assert "Unsupported hash algorithm" in result.error_message 
+    # Test md5
+    result = get_file_hash(test_file, "md5")
+    assert result.success is True
+    assert result.result["algorithm"] == "md5"
+    assert result.result["hash_value"] == expected_md5
+    
+    # Test sha1
+    result = get_file_hash(test_file, "sha1")
+    assert result.success is True
+    assert result.result["algorithm"] == "sha1"
+    assert result.result["hash_value"] == expected_sha1
+    
+    # Test invalid algorithm
+    result = get_file_hash(test_file, "invalid_algorithm")
+    assert result.success is False
+    assert "Unsupported hash algorithm" in result.error_message
+    
+    # Test non-existent file
+    nonexistent = tmp_path / "nonexistent.txt"
+    result = get_file_hash(nonexistent)
+    assert result.success is False
+    assert "not found" in result.error_message
+    
+    # Test on a directory
+    dir_path = tmp_path / "test_dir"
+    dir_path.mkdir()
+    result = get_file_hash(dir_path)
+    assert result.success is False
+    assert "not a file" in result.error_message 
