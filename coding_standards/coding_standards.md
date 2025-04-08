@@ -12,39 +12,54 @@ Unless otherwise noted
 
 ## **Table of Contents**
 
-
-
  1. [Introduction](#introduction)
+
  2. [General Principles](#general-principles)
+
  3. [Environment Setup](#environment-setup)
+
  4. [Project Structure](#project-structure)
+
  5. [Coding Guidelines](#coding-guidelines)
+
     * [Programming Languages](#programming-languages)
     * [Code Style](#code-style)
     * [Naming Conventions](#naming-conventions)
     * [Formatting and Linting](#formatting-and-linting)
     * [Comments and Documentation](#comments-and-documentation)
  6. [Error Handling and Logging](#error-handling-and-logging)
- 7. [Input Validation and Sanitization](#input-validation-and-sanitization)
- 8. [Modularity and Code Organization](#modularity-and-code-organization)
- 9. [Testing and Quality Assurance](#testing-and-quality-assurance)
-10. [Version Control Practices](#version-control-practices)
-11. [Dependency Management](#dependency-management)
-12. [Security Practices](#security-practices)
-13. [Performance Optimization](#performance-optimization)
-14. [Collaboration and Workflow](#collaboration-and-workflow)
-15. [Documentation Standards](#documentation-standards)
-16. [Deployment and Operations](#deployment-and-operations)
-17. [Additional Tools and Libraries](#additional-tools-and-libraries)
-18. [Future-Proofing and Scalability](#future-proofing-and-scalability)
-19. [Ethical Considerations](#ethical-considerations)
-20. [Conclusion](#conclusion)
 
+ 7. [Input Validation and Sanitization](#input-validation-and-sanitization)
+
+ 8. [Modularity and Code Organization](#modularity-and-code-organization)
+
+ 9. [Testing and Quality Assurance](#testing-and-quality-assurance)
+
+10. [Version Control Practices](#version-control-practices)
+
+11. [Dependency Management](#dependency-management)
+
+12. [Security Practices](#security-practices)
+
+13. [Performance Optimization](#performance-optimization)
+
+14. [Collaboration and Workflow](#collaboration-and-workflow)
+
+15. [Documentation Standards](#documentation-standards)
+
+16. [Deployment and Operations](#deployment-and-operations)
+
+17. [Additional Tools and Libraries](#additional-tools-and-libraries)
+
+18. [Future-Proofing and Scalability](#future-proofing-and-scalability)
+
+19. [Ethical Considerations](#ethical-considerations)
+
+20. [Conclusion](#conclusion)
 
 ## **1. Introduction**
 
 This coding standards document serves as a comprehensive guide for developers in our team. It covers all aspects of software development, from environment setup to deployment, ensuring that our codebase is consistent, secure, and maintainable.
-
 
 ## **2. General Principles**
 
@@ -54,7 +69,6 @@ This coding standards document serves as a comprehensive guide for developers in
 * **Scalability**: Design systems that can scale with increasing load and complexity.
 * **Security**: Incorporate security best practices at every stage of development.
 * **Collaboration**: Encourage open communication and knowledge sharing within the team.
-
 
 ## **3. Environment Setup**
 
@@ -70,7 +84,6 @@ This coding standards document serves as a comprehensive guide for developers in
 * **Frameworks Available**:
   * **Backend**: `Flask`, `Django`, `FastAPI`
   * **Frontend**: `React`, `Vue.js`, `Angular`
-
 
 ## **4. Project Structure**
 
@@ -90,7 +103,6 @@ This coding standards document serves as a comprehensive guide for developers in
   * Use central configuration files (`config.py`, `.env`).
   * Avoid hard-coded paths; use dynamic paths relative to the project directory.
   * Store secrets securely using environment variables or secret management tools.
-
 
 ## **5. Coding Guidelines**
 
@@ -130,7 +142,6 @@ This coding standards document serves as a comprehensive guide for developers in
 * Add inline comments sparingly to explain complex logic.
 * Keep comments up-to-date with code changes.
 
-
 ## **6. Error Handling and Logging**
 
 * **Error Handling**:
@@ -146,7 +157,6 @@ This coding standards document serves as a comprehensive guide for developers in
     * Important state changes.
   * Use appropriate log levels (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`).
 
-
 ## **7. Input Validation and Sanitization**
 
 * **Validation**:
@@ -156,7 +166,6 @@ This coding standards document serves as a comprehensive guide for developers in
   * Sanitize inputs to prevent security vulnerabilities like injection attacks.
   * Use parameterized queries when interacting with databases.
   * Escape or remove harmful characters in inputs.
-
 
 ## **8. Modularity and Code Organization**
 
@@ -174,7 +183,6 @@ This coding standards document serves as a comprehensive guide for developers in
   * Remove unused imports.
   * Use absolute imports over relative imports.
 
-
 ## **9. Testing and Quality Assurance**
 
 * **Unit Testing**:
@@ -189,7 +197,6 @@ This coding standards document serves as a comprehensive guide for developers in
   * Set up CI pipelines to automate testing.
   * Use services like GitHub Actions or Jenkins.
 
-
 ## **10. Version Control Practices**
 
 * **Git Usage**:
@@ -203,16 +210,15 @@ This coding standards document serves as a comprehensive guide for developers in
   * Use clear, descriptive messages.
   * Follow the convention:
 
-    ```
+    ```text
     [Type] Short description (Fixes #issue_number)
-    
+
     Detailed description of the changes.
-    ```
+    ```text
   * Types include `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
 * **Ignoring Files**:
   * Use `.gitignore` to exclude unnecessary files.
   * Regularly update `.gitignore` as needed.
-
 
 ## **11. Dependency Management**
 
@@ -224,7 +230,6 @@ This coding standards document serves as a comprehensive guide for developers in
 * **Regular Updates**:
   * Update dependencies regularly.
   * Check for security patches and deprecations.
-
 
 ## **12. Security Practices**
 
@@ -238,7 +243,6 @@ This coding standards document serves as a comprehensive guide for developers in
 * **Access Control**:
   * Implement proper authentication and authorization mechanisms.
 
-
 ## **13. Performance Optimization**
 
 * **Efficient Code**:
@@ -249,7 +253,6 @@ This coding standards document serves as a comprehensive guide for developers in
   * Use `asyncio` for IO-bound tasks when appropriate.
 * **Caching**:
   * Implement caching strategies to improve performance.
-
 
 ## **14. Collaboration and Workflow**
 
@@ -263,18 +266,17 @@ This coding standards document serves as a comprehensive guide for developers in
   * Use an issue tracker to manage tasks and bugs.
   * Keep issues up-to-date with status and relevant information.
 
-
 ## **15. Documentation Standards**
 
 * **Project-Level Documentation**:
-  * **[README.md](http://README.md)**:
+  * **[README.md](<http://README.md)**:>
     * Project overview
     * Setup instructions
     * Usage examples
     * Contribution guidelines
   * **LICENSE**:
     * Include appropriate licensing information.
-  * **[CHANGELOG.md](http://CHANGELOG.md)**:
+  * **[CHANGELOG.md](<http://CHANGELOG.md)**:>
     * Document changes in each version.
 * **Module and Function Documentation**:
   * Use docstrings to document purpose, parameters, return values, and exceptions.
@@ -282,7 +284,6 @@ This coding standards document serves as a comprehensive guide for developers in
   * Include `README.md` in subdirectories explaining their content.
 * **Documentation Generation**:
   * Use tools like `Sphinx` or `MkDocs` for generating documentation.
-
 
 ## **16. Deployment and Operations**
 
@@ -295,7 +296,6 @@ This coding standards document serves as a comprehensive guide for developers in
   * Implement monitoring using tools like **Prometheus** or **Grafana**.
 * **Logging**:
   * Ensure logs are centralized and accessible.
-
 
 ## **17. Additional Tools and Libraries**
 
@@ -310,7 +310,6 @@ This coding standards document serves as a comprehensive guide for developers in
 * **Dependency Injection**:
   * Use patterns or libraries to decouple components.
 
-
 ## **18. Future-Proofing and Scalability**
 
 * **Design Patterns**:
@@ -322,7 +321,6 @@ This coding standards document serves as a comprehensive guide for developers in
 * **Scalability**:
   * Plan for scaling up (vertical) and scaling out (horizontal).
 
-
 ## **19. Ethical Considerations**
 
 * **Data Privacy**:
@@ -332,23 +330,23 @@ This coding standards document serves as a comprehensive guide for developers in
 * **Inclusivity**:
   * Ensure software is accessible to all users.
 
-
 ## **20. Conclusion**
 
 Adhering to these coding standards will ensure that our software is of high quality, maintainable, and scalable. It fosters a collaborative environment where code is consistent and understandable by all team members.
-
 
 **Note**: This document should be reviewed and updated regularly to incorporate new best practices and address any emerging challenges.
 
 # **Appendix**
 
 * **References**:
-  * [PEP 8 - Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)
-  * [PEP 257 - Docstring Conventions](https://www.python.org/dev/peps/pep-0257/)
-  * [PEP 484 - Type Hints](https://www.python.org/dev/peps/pep-0484/)
-  * [Pydantic Documentation](https://pydantic-docs.helpmanual.io/)
-  * [Flask Documentation](https://flask.palletsprojects.com/)
-  * [Django Documentation](https://docs.djangoproject.com/)
-  * [FastAPI Documentation](https://fastapi.tiangolo.com/)
+  * [PEP 8 - Style Guide for Python Code](<https://www.python.org/dev/peps/pep-0008/)>
 
+  * [PEP 257 - Docstring Conventions](<https://www.python.org/dev/peps/pep-0257/)>
+
+  * [PEP 484 - Type Hints](<https://www.python.org/dev/peps/pep-0484/)>
+
+  * [Pydantic Documentation](<https://pydantic-docs.helpmanual.io/)>
+  * [Flask Documentation](<https://flask.palletsprojects.com/)>
+  * [Django Documentation](<https://docs.djangoproject.com/)>
+  * [FastAPI Documentation](<https://fastapi.tiangolo.com/)>
 

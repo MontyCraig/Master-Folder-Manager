@@ -45,24 +45,25 @@ graph TD
     C --> D[File System]
     C --> E[Configuration]
     E --> F[Settings File]
-```
 
+```text
 ## Type Definitions
 
 ```python
 PathType = Union[str, Path]
 ConfigType = Dict[str, Any]
 CategoryType = Dict[str, Dict[str, Union[List[str], int]]]
-```
 
+```text
 ## Error Handling
 
 All operations use try-except blocks with:
 
-
 1. Specific exception catching
-2. Logging
-3. User feedback
-4. Graceful fallbacks
 
+2. Logging
+
+3. User feedback
+
+4. Graceful fallbacks
 
