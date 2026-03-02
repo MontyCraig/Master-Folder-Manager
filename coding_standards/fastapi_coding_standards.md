@@ -93,6 +93,7 @@ fastapi_project/
 └── requirements.txt
 
 ```text
+
 ### Application Configuration
 
 ```python
@@ -105,7 +106,7 @@ from typing import Optional, Dict, Any
 class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "FastAPI Project"
-    BACKEND_CORS_ORIGINS: list[str] = ["<http://localhost:3000"]>
+    BACKEND_CORS_ORIGINS: list[str] = ["<<<http://localhost:3000"]>>>
 
     POSTGRES_SERVER: str
     POSTGRES_USER: str
@@ -119,6 +120,7 @@ class Settings(BaseSettings):
 settings = Settings()
 
 ```text
+
 ### Dependencies Management
 
 ```python
@@ -172,6 +174,7 @@ api_router.include_router(users.router, prefix="/users", tags=["users"])
 api_router.include_router(items.router, prefix="/items", tags=["items"])
 
 ```text
+
 ### Path Operations
 
 ```python
@@ -257,6 +260,7 @@ class UserInDB(UserInDBBase):
     hashed_password: str
 
 ```text
+
 ### Custom Validators
 
 ```python
@@ -328,6 +332,7 @@ def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
 ```text
+
 ### Middleware Configuration
 
 ```python
@@ -386,6 +391,7 @@ async def get_async_session() -> AsyncSession:
         yield session
 
 ```text
+
 ### Background Tasks
 
 ```python
@@ -413,6 +419,7 @@ async def create_item(
     return item
 
 ```text
+
 ### Caching
 
 ```python
@@ -470,6 +477,7 @@ def superuser_token_headers(client: TestClient) -> Dict[str, str]:
     return get_superuser_token_headers(client)
 
 ```text
+
 ### API Tests
 
 ```python
@@ -564,13 +572,14 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>
 
 ```text
+
 ## License
 
-Copyright © 2024-2025 MetaReps, Inc. All rights reserved.
+Copyright © 2024-2025 Sigma5C Corp. All rights reserved.
 
 This is proprietary software. Unauthorized copying, modification, distribution,
 or use of this software, via any medium, is strictly prohibited without the
-express written permission of MetaReps, Inc.
+express written permission of Sigma5C Corp.

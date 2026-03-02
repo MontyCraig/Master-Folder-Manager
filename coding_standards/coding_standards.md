@@ -2,11 +2,11 @@
 
 This document outlines the coding standards and best practices to be followed for all projects developed within our team. Adhering to these guidelines ensures consistency, maintainability, and high-quality code across all projects.
 
-We are the software company MetaReps so all liceneces are attributed :
+We are the software company Sigma5C Corp. so all liceneces are attributed :
 
 License
 
-MetaReps Copyright 2024 - 2025
+Sigma5C Corp. Copyright 2024 - 2025
 
 Unless otherwise noted
 
@@ -269,14 +269,14 @@ This coding standards document serves as a comprehensive guide for developers in
 ## **15. Documentation Standards**
 
 * **Project-Level Documentation**:
-  * **[README.md](<http://README.md)**:>
+  * **[README.md](<<<http://README.md)**:>>>
     * Project overview
     * Setup instructions
     * Usage examples
     * Contribution guidelines
   * **LICENSE**:
     * Include appropriate licensing information.
-  * **[CHANGELOG.md](<http://CHANGELOG.md)**:>
+  * **[CHANGELOG.md](<<<http://CHANGELOG.md)**:>>>
     * Document changes in each version.
 * **Module and Function Documentation**:
   * Use docstrings to document purpose, parameters, return values, and exceptions.
@@ -339,14 +339,14 @@ Adhering to these coding standards will ensure that our software is of high qual
 # **Appendix**
 
 * **References**:
-  * [PEP 8 - Style Guide for Python Code](<https://www.python.org/dev/peps/pep-0008/)>
+  * [PEP 8 - Style Guide for Python Code](<<<https://www.python.org/dev/peps/pep-0008/)>>>
 
-  * [PEP 257 - Docstring Conventions](<https://www.python.org/dev/peps/pep-0257/)>
+  * [PEP 257 - Docstring Conventions](<<<https://www.python.org/dev/peps/pep-0257/)>>>
 
-  * [PEP 484 - Type Hints](<https://www.python.org/dev/peps/pep-0484/)>
+  * [PEP 484 - Type Hints](<<<https://www.python.org/dev/peps/pep-0484/)>>>
 
-  * [Pydantic Documentation](<https://pydantic-docs.helpmanual.io/)>
-  * [Flask Documentation](<https://flask.palletsprojects.com/)>
-  * [Django Documentation](<https://docs.djangoproject.com/)>
-  * [FastAPI Documentation](<https://fastapi.tiangolo.com/)>
+  * [Pydantic Documentation](<<<https://pydantic-docs.helpmanual.io/)>>>
+  * [Flask Documentation](<<<https://flask.palletsprojects.com/)>>>
+  * [Django Documentation](<<<https://docs.djangoproject.com/)>>>
+  * [FastAPI Documentation](<<<https://fastapi.tiangolo.com/)>>>
 

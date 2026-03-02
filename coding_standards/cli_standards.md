@@ -95,6 +95,7 @@ cli_project/
 └── CHANGELOG.md
 
 ```text
+
 ### Command Organization
 
 ```python
@@ -215,6 +216,7 @@ def list(
         raise typer.Exit(1)
 
 ```text
+
 ### Input Validation
 
 ```python
@@ -305,6 +307,7 @@ def process_data(file: Path):
     console.print("✓ Data processed successfully", style="green")
 
 ```text
+
 ### Interactive Features
 
 ```python
@@ -336,7 +339,6 @@ def interactive_config():
     if Confirm.ask("Do you want to reset the database?"):
         console.print("Resetting database...", style="yellow")
         # ... implementation ...
-
 
     return {
         "host": host,
@@ -404,6 +406,7 @@ def save_config(config: Dict[str, Any], config_path: Optional[Path] = None):
         tomli_w.dump(config, f)
 
 ```text
+
 ### Plugin System
 
 ```python
@@ -599,4 +602,4 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>

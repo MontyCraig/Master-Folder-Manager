@@ -96,6 +96,7 @@ class BaseModel(Base, TimestampMixin, IDMixin):
         return f"<{self.__class__.__name__}(id={self.id})>"
 
 ```text
+
 ### Model Definition
 
 ```python
@@ -184,6 +185,7 @@ def create_user(username: str, email: str) -> User:
         return user
 
 ```text
+
 ### Query Building
 
 ```python
@@ -257,6 +259,7 @@ class PostRepository:
         ).all()
 
 ```text
+
 ### Bulk Operations
 
 ```python
@@ -304,6 +307,7 @@ def run_migrations_online():
             context.run_migrations()
 
 ```text
+
 ### Migration Script
 
 ```python
@@ -374,6 +378,7 @@ def session(engine, tables):
     connection.close()
 
 ```text
+
 ### Model Tests
 
 ```python
@@ -493,4 +498,4 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>

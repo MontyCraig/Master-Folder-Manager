@@ -64,9 +64,9 @@ The Enhanced Folder Manager is a robust Python application for efficient file or
 
 ## Quick Links
 
-- [GitHub Repository](<https://github.com/yourusername/master-folder-manager)>
+- [GitHub Repository](<<<https://github.com/yourusername/master-folder-manager)>>>
 
-- [Issue Tracker](<https://github.com/yourusername/master-folder-manager/issues)>
+- [Issue Tracker](<<<https://github.com/yourusername/master-folder-manager/issues)>>>
 
 - [Change Log](./CHANGELOG.md)
 
@@ -87,4 +87,4 @@ Status: Active Development
 
 ## License
 
-MetaReps Copyright 2024 - 2025. See [LICENSE](./LICENSE.md) for details.
+Sigma5C Corp. Copyright 2024 - 2025. See [LICENSE](./LICENSE.md) for details.

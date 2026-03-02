@@ -43,6 +43,7 @@ def operation_handler(func):
     return wrapper
 
 ```text
+
 ### Function Return Types
 
 Modified the return behavior of specific functions to return raw values that get wrapped in FileOperation objects by the decorator:
@@ -66,6 +67,7 @@ assert result.result == new_path
 assert str(result.result) == str(new_path)
 
 ```text
+
 ## Benefits of the Upgrade
 
 1. **Better Performance**: Pydantic v2 is significantly faster than v1

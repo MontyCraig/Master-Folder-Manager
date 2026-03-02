@@ -101,6 +101,7 @@ def create_app(config_name):
     return app
 
 ```text
+
 ### Project Layout
 
 ```text
@@ -122,6 +123,7 @@ flask_project/
 └── wsgi.py
 
 ```text
+
 ### Configuration Management
 
 ```python
@@ -208,6 +210,7 @@ def user(username):
     return render_template('user.html', user=user)
 
 ```text
+
 ### Forms & Validation
 
 ```python
@@ -280,6 +283,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 ```text
+
 ### Security Headers
 
 ```python
@@ -331,6 +335,7 @@ def get_users():
     return render_template('users.html', users=users)
 
 ```text
+
 ### Database Optimization
 
 ```python
@@ -386,6 +391,7 @@ def runner(app):
     return app.test_cli_runner()
 
 ```text
+
 ### Unit Tests
 
 ```python
@@ -515,6 +521,6 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>
 
 ```text

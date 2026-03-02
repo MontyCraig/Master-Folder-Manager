@@ -26,10 +26,11 @@ Enhanced Folder Manager is a powerful tool for organizing and managing your file
 pip install enhanced-folder-manager
 
 ```text
+
 ### From source
 
 ```bash
-git clone <https://github.com/MontyCraig/Master-Folder-Manager.git>
+git clone <<<https://github.com/MontyCraig/Master-Folder-Manager.git>>>
 cd master-folder-manager
 
 # Create a virtual environment (recommended)
@@ -43,6 +44,7 @@ pip install -r requirements.txt
 pip install -e .
 
 ```text
+
 ## Basic Usage
 
 ### Command Line Interface
@@ -68,6 +70,7 @@ efm organize ~/Downloads --by-category
 efm info ~/Documents/file.txt
 
 ```text
+
 ### Python API
 
 You can also use the manager in your Python code:
@@ -102,6 +105,7 @@ if stats.success:
     print(f"Total files: {stats.result.file_count}")
 
 ```text
+
 ## Configuration
 
 The manager can be configured using a YAML file:
@@ -125,6 +129,7 @@ settings:
   backup_files: true
 
 ```text
+
 ## Next Steps
 
 1. Read the [Configuration Guide](./configuration.md) for detailed settings
@@ -152,6 +157,7 @@ efm organize ~/Pictures --by-date
 efm organize ~/Documents --config my_rules.yaml
 
 ```text
+
 ### File Analysis
 
 ```bash
@@ -169,6 +175,7 @@ efm analyze ~/Downloads --find-duplicates
 efm analyze ~/Pictures --report report.html
 
 ```text
+
 ### File Operations
 
 ```bash
@@ -186,6 +193,7 @@ efm delete sensitive.txt --secure
 efm rename "*.jpg" "vacation_{n}.jpg"
 
 ```text
+
 ## Tips and Best Practices
 
 1. **Regular Organization**
@@ -218,7 +226,7 @@ efm rename "*.jpg" "vacation_{n}.jpg"
 
 - Check the [FAQ](./faq.md) for common questions
 
-- Visit our [GitHub Issues](<https://github.com/yourusername/master-folder-manager/issues)> page
+- Visit our [GitHub Issues](<<<https://github.com/yourusername/master-folder-manager/issues)>>> page
 
 - Join our community on [Discord/Slack]
 
@@ -230,6 +238,7 @@ To update to the latest version:
 pip install --upgrade enhanced-folder-manager
 
 ```text
+
 ## Uninstallation
 
 If needed, you can uninstall:
@@ -238,6 +247,7 @@ If needed, you can uninstall:
 pip uninstall enhanced-folder-manager
 
 ```text
+
 ## Next Steps
 
 - [Configuration Guide](./configuration.md)

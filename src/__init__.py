@@ -1,5 +1,5 @@
 """
 Enhanced Folder Manager package.
 
-License: MetaReps Copyright 2024 - 2025
+License: Sigma5C Corp. Copyright 2024 - 2025
 """

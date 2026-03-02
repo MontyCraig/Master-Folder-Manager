@@ -88,6 +88,7 @@ class UserBase(BaseModel):
         validate_assignment = True  # Validate on attribute assignment
 
 ```text
+
 ### Field Types & Validation
 
 ```python
@@ -169,6 +170,7 @@ class User(BaseModel):
         return v
 
 ```text
+
 ### Custom Types
 
 ```python
@@ -232,6 +234,7 @@ dict_data = user.model_dump()  # For dict conversion
 formatted_data = user.dict_with_formatted_datetime()
 
 ```text
+
 ### Custom Encoders
 
 ```python
@@ -284,6 +287,7 @@ def get_settings() -> Settings:
     return Settings()
 
 ```text
+
 ### Dynamic Model Creation
 
 ```python
@@ -350,6 +354,7 @@ async def create_user(user: UserCreate):
         raise HTTPException(status_code=422, detail=str(e))
 
 ```text
+
 ### Database Integration
 
 ```python
@@ -495,4 +500,4 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>

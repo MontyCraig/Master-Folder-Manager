@@ -141,6 +141,7 @@ class MicroService(ServiceBase):
         }
 
 ```text
+
 ### API Design
 
 ```python
@@ -250,6 +251,7 @@ microservice/
 └── README.md
 
 ```text
+
 ### Service Implementation
 
 ```python
@@ -364,6 +366,7 @@ ENV PYTHONPATH=/app
 CMD ["uvicorn", "src.service_name.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 ```text
+
 ```yaml
 
 # docker-compose.yml
@@ -391,7 +394,7 @@ services:
       - kafka
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "<http://localhost:8000/health"]>
+      test: ["CMD", "curl", "-f", "<<<http://localhost:8000/health"]>>>
       interval: 30s
       timeout: 10s
       retries: 3
@@ -408,12 +411,10 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-
   cache:
     image: redis:6
     volumes:
       - redis_data:/data
-
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -493,6 +494,7 @@ class ExternalService:
                 return await response.json()
 
 ```text
+
 ### Rate Limiting
 
 ```python
@@ -521,7 +523,6 @@ class RateLimiter:
         redis_key = f"{self.key_prefix}:{key}"
         current = int(time.time())
         window_start = current - self.window
-
 
         pipeline = self.redis.pipeline()
         pipeline.zremrangebyscore(redis_key, 0, window_start)
@@ -648,7 +649,6 @@ class LoggingMiddleware:
             status = response.status_code
             duration = time.time() - start_time
 
-
             logger.info(
                 "request_processed",
                 method=request.method,
@@ -764,4 +764,4 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>

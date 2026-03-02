@@ -1,7 +1,7 @@
 """
 Setup file for Master Folder Manager.
 
-License: MetaReps Copyright 2024 - 2025
+License: Sigma5C Corp. Copyright 2024 - 2025
 """
 
 from setuptools import setup, find_packages
@@ -10,7 +10,7 @@ setup(
     name="master-folder-manager",
     version="0.1.0",
     description="Tool for managing files and folders across drives",
-    author="MetaReps",
+    author="Sigma5C Corp.",
     packages=find_packages(),
     install_requires=[
         "click>=8.0.0",

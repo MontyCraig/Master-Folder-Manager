@@ -108,6 +108,7 @@ class APIClient:
         self.close()
 
 ```text
+
 ### Resource Organization
 
 ```python
@@ -195,6 +196,7 @@ class RequestBuilder:
         return request
 
 ```text
+
 ### Retry Logic
 
 ```python
@@ -270,6 +272,7 @@ class APIResponse(BaseModel):
     meta: Optional[Dict[str, Any]] = None
 
 ```text
+
 ### Response Processing
 
 ```python
@@ -344,7 +347,6 @@ class BearerAuth(AuthHandler):
             return False
         return datetime.utcnow() >= self.expires_at - timedelta(minutes=5)
 
-
     def refresh_auth(self) -> None:
         if not self.refresh_token:
             raise ValueError("No refresh token available")
@@ -401,6 +403,7 @@ class AsyncAPIClient:
             page += 1
 
 ```text
+
 ### Caching
 
 ```python
@@ -553,4 +556,4 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>

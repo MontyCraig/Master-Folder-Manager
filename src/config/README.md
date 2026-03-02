@@ -20,6 +20,7 @@ Technical specifications for configuration management.
 }
 
 ```text
+
 ## Settings Management
 
 ### Load Process

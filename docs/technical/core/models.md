@@ -66,8 +66,6 @@ Represents detailed information about a file or directory in the system.
 
    - No invalid characters (<>:"|?*)
 
-
-
 2. Path validation:
 
    - Must be absolute path
@@ -178,8 +176,6 @@ Represents a file's cryptographic hash.
 
    - Case-insensitive matching
 
-
-
 2. Hash validation:
 
    - Length must match algorithm (MD5: 32, SHA-1: 40, etc.)
@@ -276,6 +272,7 @@ category = CategoryConfig(
 )
 
 ```text
+
 ## Error Handling
 
 All models include comprehensive error handling:

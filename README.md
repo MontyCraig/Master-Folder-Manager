@@ -2,7 +2,7 @@
 
 A professional-grade CLI tool for organizing and managing files across multiple drives and volumes.
 
-License: MetaReps Copyright 2024 - 2025
+License: Sigma5C Corp. Copyright 2024 - 2025
 
 ## Overview
 
@@ -46,13 +46,14 @@ Master Folder Manager (MFM) is a powerful command-line interface tool designed t
 pip install master-folder-manager
 
 ```text
+
 ### From Source
 
 ```bash
 
 # Clone the repository
 
-git clone <https://github.com/yourusername/master-folder-manager.git>
+git clone <<<https://github.com/yourusername/master-folder-manager.git>>>
 cd master-folder-manager
 
 # Create virtual environment
@@ -69,6 +70,7 @@ pip install -r requirements.txt
 pip install -e .
 
 ```text
+
 ## Usage
 
 ```bash
@@ -90,6 +92,7 @@ efm organize ~/Downloads --by-category
 efm --help
 
 ```text
+
 ## Project Structure
 
 ```text
@@ -115,6 +118,7 @@ master-folder-manager/
 └── docs/                  # Documentation
 
 ```text
+
 ## Configuration
 
 The tool maintains configuration in `~/.config/efm/config.yaml` including:
@@ -137,7 +141,7 @@ The tool maintains configuration in `~/.config/efm/config.yaml` including:
 
 # Clone the repository
 
-git clone <https://github.com/yourusername/master-folder-manager.git>
+git clone <<<https://github.com/yourusername/master-folder-manager.git>>>
 cd master-folder-manager
 
 # Create virtual environment
@@ -154,6 +158,7 @@ pip install -r requirements.txt
 python -m pytest
 
 ```text
+
 ### Running Tests
 
 ```bash
@@ -171,6 +176,7 @@ python -m pytest --cov=src
 python -m pytest tests/core/test_models.py
 
 ```text
+
 ## Development Status
 
 ### Current Features
@@ -217,5 +223,5 @@ python -m pytest tests/core/test_models.py
 
 ## License
 
-MetaReps Copyright 2024 - 2025
+Sigma5C Corp. Copyright 2024 - 2025
 

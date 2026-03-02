@@ -26,6 +26,7 @@ enhanced_folder_manager/
     └── responses.py    # API response models
 
 ```text
+
 ## Core Components
 
 ### 1. File Operations (`file_ops.py`)
@@ -76,6 +77,7 @@ def safe_move_file(
     """
 
 ```text
+
 ### 2. Directory Operations (`dir_ops.py`)
 
 Manages directory-level operations and analysis:
@@ -125,6 +127,7 @@ def organize_files(
     """
 
 ```text
+
 ### 3. Data Models (`models.py`)
 
 Defines data structures and validation:
@@ -147,6 +150,7 @@ class OperationResult(BaseModel):
     details: Dict[str, Any]
 
 ```text
+
 ### 4. Configuration Management (`config.py`)
 
 Handles configuration loading and validation:
@@ -163,6 +167,7 @@ class Config(BaseModel):
         """Load and validate configuration from YAML"""
 
 ```text
+
 ## Error Handling
 
 The system uses a comprehensive error handling approach:
@@ -205,6 +210,7 @@ except FileSystemError as e:
     )
 
 ```text
+
 ## Performance Considerations
 
 1. **Lazy Loading**
@@ -285,6 +291,7 @@ The system provides several extension mechanisms:
    manager.on_file_move(callback)
    manager.on_directory_scan(callback)
    ```text
+
 ## Testing
 
 The project includes comprehensive tests:

@@ -1,7 +1,7 @@
 """
 Path management utilities for Enhanced Folder Manager.
 
-License: MetaReps Copyright 2024 - 2025
+License: Sigma5C Corp. Copyright 2024 - 2025
 """
 
 import json
@@ -16,7 +16,7 @@ DEV_PATHS = {
         "/Volumes/Seagate_2",
         "/Volumes/Seagate",
         "/Volumes/MongoDB",
-        "/Volumes/MetaReps",
+        "/Volumes/Sigma5C Corp.",
         "/Volumes/Willie",
         "/Volumes/One Touch",
         "/Volumes/4 TB Monty"

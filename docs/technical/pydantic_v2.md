@@ -22,6 +22,7 @@ class MyModel(BaseModel):
     )
 
 ```text
+
 ### 2. Serialization
 
 Instead of using `json_encoders`, we now implement custom serialization through the `model_dump` method:
@@ -34,6 +35,7 @@ def model_dump(self, **kwargs):
     return data
 
 ```text
+
 ### 3. Validation Decorators
 
 - Using `@field_validator` instead of `@validator`
@@ -49,6 +51,7 @@ def validate_field(cls, v):
     return v
 
 ```text
+
 ### 4. Error Messages
 
 Error messages have been standardized in Pydantic v2. Our test suite has been updated to match the new format:
@@ -147,6 +150,7 @@ If you're upgrading from a previous version that used Pydantic v1:
        return result
    return ModelA(value=result)
    ```text
+
 ## Testing
 
 Our test suite has been updated to handle Pydantic v2's error messages. Key changes include:
@@ -172,11 +176,11 @@ Our test suite has been updated to handle Pydantic v2's error messages. Key chan
 
    assert result.path == expected_path  # When expected_path is a Path object
 
-
    # New
 
    assert str(result.path) == str(expected_path)
    ```text
+
 ## Best Practices
 
 1. Always use type hints with your models
@@ -205,8 +209,8 @@ Our test suite has been updated to handle Pydantic v2's error messages. Key chan
 
 ## Additional Resources
 
-- [Pydantic v2 Documentation](<https://docs.pydantic.dev/latest/)>
+- [Pydantic v2 Documentation](<<<https://docs.pydantic.dev/latest/)>>>
 
-- [Migration Guide](<https://docs.pydantic.dev/latest/migration/)>
+- [Migration Guide](<<<https://docs.pydantic.dev/latest/migration/)>>>
 
-- [API Reference](<https://docs.pydantic.dev/latest/api/)>
+- [API Reference](<<<https://docs.pydantic.dev/latest/api/)>>>

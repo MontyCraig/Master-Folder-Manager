@@ -47,6 +47,7 @@ graph TD
     E --> F[Settings File]
 
 ```text
+
 ## Type Definitions
 
 ```python
@@ -55,6 +56,7 @@ ConfigType = Dict[str, Any]
 CategoryType = Dict[str, Dict[str, Union[List[str], int]]]
 
 ```text
+
 ## Error Handling
 
 All operations use try-except blocks with:

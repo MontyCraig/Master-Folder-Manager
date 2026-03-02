@@ -47,6 +47,7 @@ else:
     print(f"Error: {result.error_message}")
 
 ```text
+
 ### safe_move_file
 
 Safely moves a file to a new location with validation and error handling.
@@ -103,6 +104,7 @@ else:
     print(f"Error: {result.error_message}")
 
 ```text
+
 ### safe_copy_file
 
 Safely copies a file to a new location with validation and error handling.
@@ -159,6 +161,7 @@ else:
     print(f"Error: {result.error_message}")
 
 ```text
+
 ### delete_file
 
 Deletes a file or directory with optional secure deletion.
@@ -205,6 +208,7 @@ else:
     print(f"Error: {result.error_message}")
 
 ```text
+
 ### rename_file
 
 Renames a file or directory.
@@ -251,6 +255,7 @@ else:
     print(f"Error: {result.error_message}")
 
 ```text
+
 ### get_file_hash
 
 Calculates cryptographic hash of a file.
@@ -300,6 +305,7 @@ else:
     print(f"Error: {result.error_message}")
 
 ```text
+
 ## Error Handling Strategy
 
 1. All functions use the `@operation_handler` decorator

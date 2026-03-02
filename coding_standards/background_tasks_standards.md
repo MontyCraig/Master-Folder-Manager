@@ -99,7 +99,6 @@ app.conf.update(
 
     task_soft_time_limit=3300,  # 55 minutes
 
-
     # Worker settings
 
     worker_prefetch_multiplier=1,
@@ -197,6 +196,7 @@ def process_data(
         raise self.retry(exc=exc, countdown=retry_delay)
 
 ```text
+
 ### Task Chains and Groups
 
 ```python
@@ -720,7 +720,6 @@ class TaskMonitor:
         now = datetime.utcnow()
         cutoff = now - window
 
-
         # Get completed tasks in window
 
         completed_tasks = self.redis.hgetall("completed_tasks")
@@ -739,7 +738,6 @@ class TaskMonitor:
             if t["status"] == "completed"
         )
         failed_tasks = total_tasks - successful_tasks
-
 
         return {
             "total_tasks": total_tasks,
@@ -854,4 +852,4 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>

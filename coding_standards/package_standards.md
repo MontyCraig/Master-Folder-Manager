@@ -97,6 +97,7 @@ package_name/
 └── tox.ini
 
 ```text
+
 ### Package Configuration
 
 ```toml
@@ -148,10 +149,10 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "<https://github.com/username/package-name">
-Documentation = "<https://package-name.readthedocs.io/">
-Repository = "<https://github.com/username/package-name.git">
-Changelog = "<https://github.com/username/package-name/blob/main/CHANGELOG.md">
+Homepage = "<<<https://github.com/username/package-name">>>
+Documentation = "<<<https://package-name.readthedocs.io/">>>
+Repository = "<<<https://github.com/username/package-name.git">>>
+Changelog = "<<<https://github.com/username/package-name/blob/main/CHANGELOG.md">>>
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/package_name"]
@@ -179,7 +180,7 @@ pre-commit==3.5.0
 
 repos:
 
--   repo: <https://github.com/pre-commit/pre-commit-hooks>
+-   repo: <<<https://github.com/pre-commit/pre-commit-hooks>>>
 
     rev: v4.5.0
     hooks:
@@ -191,13 +192,13 @@ repos:
 
     -   id: check-added-large-files
 
--   repo: <https://github.com/psf/black>
+-   repo: <<<https://github.com/psf/black>>>
 
     rev: 23.10.0
     hooks:
     -   id: black
 
--   repo: <https://github.com/charliermarsh/ruff-pre-commit>
+-   repo: <<<https://github.com/charliermarsh/ruff-pre-commit>>>
 
     rev: v0.1.3
     hooks:
@@ -205,7 +206,7 @@ repos:
 
         args: [--fix]
 
--   repo: <https://github.com/pre-commit/mirrors-mypy>
+-   repo: <<<https://github.com/pre-commit/mirrors-mypy>>>
 
     rev: v1.6.1
     hooks:
@@ -214,6 +215,7 @@ repos:
         additional_dependencies: [types-all]
 
 ```text
+
 ### Type Checking Configuration
 
 ```toml
@@ -282,6 +284,7 @@ python_files = test_*.py
 python_functions = test_*
 
 ```text
+
 ### Code Style Configuration
 
 ```toml
@@ -341,6 +344,7 @@ from .utils.helpers import helper_function
 __all__ = ["main_function", "helper_function"]
 
 ```text
+
 ### Release Process
 
 ```yaml
@@ -359,7 +363,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
 
     - name: Set up Python
 
@@ -409,7 +412,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-
     - name: Set up Python
 
       uses: actions/setup-python@v4
@@ -431,6 +433,7 @@ jobs:
         commit-message: 'chore: update dependencies'
 
 ```text
+
 ### Security Checks
 
 ```yaml
@@ -452,7 +455,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
 
     - name: Set up Python
 
@@ -556,6 +558,7 @@ Brief description of the package.
 pip install package-name
 
 ```text
+
 ## Usage
 
 ```python
@@ -564,6 +567,7 @@ from package_name import main_function
 result = main_function()
 
 ```text
+
 ## Features
 
 - Feature 1
@@ -578,7 +582,7 @@ result = main_function()
 
 # Clone the repository
 
-git clone <https://github.com/username/package-name.git>
+git clone <<<https://github.com/username/package-name.git>>>
 cd package-name
 
 # Create virtual environment
@@ -606,13 +610,14 @@ black .
 ruff check --fix .
 
 ```text
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>
 
 ## Conclusion
 
@@ -640,4 +645,4 @@ Remember to:
 
 - Engage with the community
 
-```
+```text

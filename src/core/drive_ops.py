@@ -1,7 +1,7 @@
 """
 Drive operations module for Enhanced Folder Manager.
 
-License: MetaReps Copyright 2024 - 2025
+License: Sigma5C Corp. Copyright 2024 - 2025
 """
 
 import psutil

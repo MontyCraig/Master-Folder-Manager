@@ -95,6 +95,7 @@ my_project/
 └── docs/
 
 ```text
+
 ### App Organization
 
 - Keep apps small and focused on a single responsibility
@@ -123,7 +124,6 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     # ... other Django apps
 
-
     # Third-party apps
 
     'rest_framework',
@@ -136,6 +136,7 @@ INSTALLED_APPS = [
 ]
 
 ```text
+
 ### URL Configuration
 
 ```python
@@ -187,6 +188,7 @@ class Product(BaseModel):
         return self.name
 
 ```text
+
 ### QuerySet Best Practices
 
 ```python
@@ -235,6 +237,7 @@ class ProductListView(LoginRequiredMixin, ListView):
         return context
 
 ```text
+
 ### Template Organization
 
 ```html
@@ -341,6 +344,7 @@ class ProductListView(ListView):
     # ... view implementation
 
 ```text
+
 ### Asynchronous Views
 
 ```python
@@ -387,6 +391,7 @@ class ProductModelTest(TestCase):
         self.assertEqual(str(self.product), 'Test Product')
 
 ```text
+
 ### Factory Pattern for Tests
 
 ```python
@@ -487,4 +492,4 @@ Remember to regularly review and update these standards as Django evolves and ne
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <http://www.apache.org/licenses/LICENSE-2.0.>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>
