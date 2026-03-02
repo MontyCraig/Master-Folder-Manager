@@ -9,6 +9,7 @@ Master Folder Manager (MFM) is a professional-grade command-line interface tool 
 ## Purpose
 
 MFM provides intelligent file organization capabilities essential for managing the massive storage infrastructure of the Sigma5C cluster (12TB+ across multiple servers). The tool streamlines:
+
 - Multi-drive file organization and categorization
 - Bulk file operations with safety checks
 - Storage analysis and capacity planning
@@ -17,7 +18,7 @@ MFM provides intelligent file organization capabilities essential for managing t
 
 ## Directory Structure
 
-```
+```text
 master-folder-manager/
 ├── src/                          # Source code
 │   ├── core/                     # Core functionality modules
@@ -56,6 +57,7 @@ master-folder-manager/
 ### Core Modules
 
 #### file_ops.py
+
 - File copying with progress tracking
 - Safe file moving with collision detection
 - Secure file deletion with confirmation
@@ -63,6 +65,7 @@ master-folder-manager/
 - Integrity verification (checksums)
 
 #### dir_ops.py
+
 - Directory creation and management
 - Recursive directory operations
 - Directory tree traversal
@@ -70,6 +73,7 @@ master-folder-manager/
 - Permission management
 
 #### models.py
+
 - **Pydantic v2 data models** for type safety
 - FileInfo: File metadata representation
 - DirectoryInfo: Directory structure models
@@ -78,6 +82,7 @@ master-folder-manager/
 - Validation and serialization
 
 #### drive_ops.py
+
 - Multi-volume detection and management
 - Storage capacity monitoring
 - Mount point tracking
@@ -87,6 +92,7 @@ master-folder-manager/
 ### Configuration System
 
 #### settings.py
+
 - Configuration file location: `~/.config/efm/config.yaml`
 - Master folder locations registry
 - Quick access volume shortcuts
@@ -97,6 +103,7 @@ master-folder-manager/
 ### Command-Line Interface
 
 #### Primary Command: `efm`
+
 - Interactive mode for guided operations
 - Direct command mode for scripting
 - Rich terminal output with colors and progress bars
@@ -105,19 +112,22 @@ master-folder-manager/
 ## Dependencies
 
 ### Python Requirements
-- **Python**: 3.8 or higher (3.11+ recommended on Sigma5C)
+
+- **Python**: 3.9 or higher (3.11+ recommended on Sigma5C)
 - **Pydantic**: v2.0.0+ (modern data validation)
 - **Click**: 8.0.0+ (CLI framework)
 - **Rich**: 13.0.0+ (terminal formatting)
 - Additional dependencies in requirements.txt
 
 ### System Requirements
+
 - Linux/Unix environment (Ubuntu 24.04 LTS on Sigma5C)
 - Sufficient permissions for file operations
 - Access to target storage volumes
 - Terminal with Unicode support (for Rich output)
 
 ### Sigma5C Integration
+
 - Deployed on T430, R430, T620_1 servers
 - Access to NFS-mounted storage volumes
 - Integration with cluster file management policies
@@ -125,6 +135,7 @@ master-folder-manager/
 ## Installation
 
 ### From Source (Sigma5C Standard)
+
 ```bash
 # Navigate to project directory
 cd /home/candc/Desktop/projects/master-folder-manager
@@ -144,12 +155,14 @@ efm --version
 ```
 
 ### From PyPI (Future)
+
 ```bash
 # When published to PyPI
 pip install master-folder-manager
 ```
 
 ### System-wide Installation (Sigma5C Cluster)
+
 ```bash
 # Install for all users (requires sudo)
 sudo pip install -e /home/candc/Desktop/projects/master-folder-manager
@@ -161,6 +174,7 @@ sudo ln -s /home/candc/Desktop/projects/master-folder-manager/venv/bin/efm /usr/
 ## Usage
 
 ### Interactive Mode
+
 ```bash
 # Start interactive interface
 efm
@@ -171,6 +185,7 @@ efm
 ### Direct Commands
 
 #### Analyze Directory
+
 ```bash
 # Analyze specific directory
 efm analyze ~/Documents
@@ -183,6 +198,7 @@ efm analyze /mnt/Storage12TB_1
 ```
 
 #### Organize Files
+
 ```bash
 # Organize by file category
 efm organize ~/Downloads --by-category
@@ -198,6 +214,7 @@ efm organize ~/Downloads --by-category --dry-run
 ```
 
 #### Drive Management
+
 ```bash
 # List all drives
 efm drives list
@@ -213,6 +230,7 @@ efm drives health /mnt/Storage12TB_1
 ```
 
 #### Search Operations
+
 ```bash
 # Search for files
 efm search "*.pdf" --path ~/Documents
@@ -225,6 +243,7 @@ efm search --modified-after 2025-01-01 --path ~/Projects
 ```
 
 #### Category Management
+
 ```bash
 # List file categories
 efm categories list
@@ -237,6 +256,7 @@ efm categories apply --path ~/Downloads
 ```
 
 ### Configuration
+
 ```bash
 # Show current configuration
 efm config show
@@ -252,6 +272,7 @@ efm config edit
 ```
 
 ### Help System
+
 ```bash
 # General help
 efm --help
@@ -265,24 +286,28 @@ efm search --help
 ## Integration with Sigma5C Systems
 
 ### Storage Infrastructure
+
 - **T430**: 12TB primary storage (Storage12TB_1)
 - **R430**: 125GB RAM server with storage management role
 - **T620_1**: NFS exports and shared storage
 - **R610**: Additional storage volumes via SSHFS
 
 ### File Organization Policies
+
 1. **Project files**: Organized by project in `/home/candc/Desktop/projects/`
 2. **Cluster management**: `/home/candc/Desktop/AllDrives/Storage12TB_1/Claude_Code_Max/`
 3. **User data**: `/home/candc/Documents/`, `/home/candc/Downloads/`
 4. **Shared storage**: NFS mounts accessible cluster-wide
 
 ### Backup Integration
+
 - Pre-backup file organization
 - Post-backup cleanup operations
 - Duplicate file detection before backup
 - Storage optimization for backup efficiency
 
 ### Automation Potential
+
 ```bash
 # Cron job for automated organization (example)
 # Daily at 2 AM: organize downloads
@@ -295,11 +320,13 @@ efm search --help
 ## Configuration
 
 ### Configuration File Location
-```
+
+```text
 ~/.config/efm/config.yaml
 ```
 
 ### Configuration Schema
+
 ```yaml
 master_folders:
   - /mnt/Storage12TB_1/MasterFiles
@@ -343,10 +370,11 @@ preferences:
 ## Development
 
 ### Setting Up Development Environment
+
 ```bash
 # Clone repository (if pulling from external source)
-git clone https://github.com/yourusername/master-folder-manager.git
-cd master-folder-manager
+git clone https://github.com/MontyCraig/Master-Folder-Manager.git
+cd Master-Folder-Manager
 
 # Create virtual environment
 python3 -m venv venv
@@ -361,6 +389,7 @@ pre-commit install
 ```
 
 ### Running Tests
+
 ```bash
 # Run all tests
 python -m pytest
@@ -379,6 +408,7 @@ python -m pytest -k "test_file_ops"
 ```
 
 ### Code Quality
+
 ```bash
 # Format code with black
 black src/ tests/
@@ -394,6 +424,7 @@ black src/ tests/ && flake8 src/ tests/ && mypy src/ && pytest
 ```
 
 ### Coverage Analysis
+
 - Coverage reports generated in `htmlcov/` directory
 - Current coverage: Check `.coverage` file
 - Open `htmlcov/index.html` in browser for detailed coverage report
@@ -401,6 +432,7 @@ black src/ tests/ && flake8 src/ tests/ && mypy src/ && pytest
 ## Common Commands
 
 ### Quick Operations
+
 ```bash
 # Quick analyze and organize workflow
 efm analyze ~/Downloads && efm organize ~/Downloads --by-category
@@ -416,6 +448,7 @@ efm drives space --all --report ~/storage_report_$(date +%Y%m%d).txt
 ```
 
 ### Sigma5C Specific Commands
+
 ```bash
 # Organize project files
 efm organize /home/candc/Desktop/projects --by-project
@@ -433,9 +466,11 @@ efm duplicates find --path /home/candc/Documents --hash md5
 ## Troubleshooting
 
 ### Issue: Permission Denied
+
 **Symptoms**: Cannot move/copy/delete files
 
 **Solutions**:
+
 ```bash
 # Check file permissions
 ls -la <file>
@@ -451,9 +486,11 @@ chmod -R u+rwX <directory>
 ```
 
 ### Issue: Configuration Not Loading
+
 **Symptoms**: Default settings used instead of custom config
 
 **Solutions**:
+
 ```bash
 # Check config file exists
 ls -la ~/.config/efm/config.yaml
@@ -470,9 +507,11 @@ efm config init
 ```
 
 ### Issue: Drive Not Detected
+
 **Symptoms**: efm drives list doesn't show expected volumes
 
 **Solutions**:
+
 ```bash
 # Check mount points
 df -h
@@ -491,9 +530,11 @@ efm config add-volume --name "MissingDrive" --path /mnt/missing_drive
 ```
 
 ### Issue: Pydantic v2 Compatibility
+
 **Symptoms**: Errors related to Pydantic models
 
 **Solutions**:
+
 ```bash
 # Check Pydantic version
 pip show pydantic
@@ -508,24 +549,28 @@ pip install -e . --force-reinstall
 ## Security Considerations
 
 ### File Operation Safety
+
 - **Confirmation prompts**: Destructive operations require confirmation
 - **Dry-run mode**: Preview operations before execution
 - **Logging**: All operations logged for audit trail
 - **Backup recommendations**: Always backup before bulk operations
 
 ### Permission Management
+
 - Respects existing file permissions
 - Preserves ownership during operations
 - Warns when operations require elevated privileges
 - Never escalates privileges without explicit user action
 
 ### Data Privacy
+
 - No data transmitted externally
 - Configuration stored locally
 - No telemetry or usage tracking
 - File contents never read unless explicitly required (hash calculations)
 
 ### Cluster Security Integration
+
 - Coordinate with Eric864 (Security Lead) for policy compliance
 - Respect cluster-wide file access policies
 - Log operations for security audits
@@ -536,23 +581,27 @@ pip install -e . --force-reinstall
 ### Regular Tasks
 
 #### Daily
+
 - Monitor operation logs for errors
 - Check configuration file integrity
 - Verify drive access and mount points
 
 #### Weekly
+
 - Review and clean up organized files
 - Update category rules if needed
 - Check for software updates
 - Analyze storage space trends
 
 #### Monthly
+
 - Comprehensive storage analysis across cluster
 - Archive old logs
 - Review and update quick access volumes
 - Backup configuration file
 
 ### Update Procedure
+
 ```bash
 # Pull latest changes (if from git)
 cd /home/candc/Desktop/projects/master-folder-manager
@@ -571,12 +620,14 @@ pip install -e .
 ## Related Projects
 
 ### Within Sigma5C
+
 - **Change_Point**: Statistical analysis for file organization patterns
 - **Chat_Bot_One**: AI-assisted file management queries
 - **Predictive-Analytics**: Storage capacity prediction
 - **October_28th_2025_Hardware_Audit**: Storage infrastructure inventory
 
 ### Related Tools
+
 - **rsync**: Bulk file transfers between servers
 - **ncdu**: Disk usage analysis
 - **tree**: Directory structure visualization
@@ -586,6 +637,7 @@ pip install -e .
 ## Development Status
 
 ### Completed Features
+
 - [x] Interactive file and directory navigation
 - [x] Multi-volume support and management
 - [x] Smart file categorization
@@ -598,12 +650,14 @@ pip install -e .
 - [x] Comprehensive documentation
 
 ### In Progress
+
 - [ ] Git repository detection for code files
 - [ ] Duplicate file detection with hashing
 - [ ] File comparison tools
 - [ ] Advanced search with regex support
 
 ### Planned Features
+
 - [ ] Custom categorization rule builder
 - [ ] Batch processing with job queues
 - [ ] API endpoint for programmatic access
@@ -618,19 +672,21 @@ pip install -e .
 - **Project Lead**: CandC (System Administrator)
 - **Original Copyright**: Sigma5C Corp. 2024-2025
 - **Current Owner**: Sigma5C Corp. 2024-2026
-- **Email**: sigma5ccorp@google.com
-- **Support**: info@sigma5c.com
+- **Email**: <sigma5ccorp@google.com>
+- **Support**: <info@sigma5c.com>
 - **Website**: sigma5c.com
 
 ## Notes
 
 ### Performance Considerations
+
 - Large directory operations can be time-consuming
 - Use `--dry-run` for preview on large datasets
 - Consider using `nice` for background operations
 - Monitor disk I/O during bulk operations
 
 ### Best Practices
+
 1. **Always backup** before bulk organization
 2. **Use dry-run mode** to preview changes
 3. **Organize incrementally** rather than all at once
@@ -639,12 +695,14 @@ pip install -e .
 6. **Test category rules** on small datasets first
 
 ### Known Limitations
+
 - No support for Windows file systems (NTFS-specific features)
 - Limited handling of special characters in filenames
 - No built-in encryption support
 - Single-threaded operations (no parallel processing yet)
 
 ### Changelog Highlights
+
 - See CHANGELOG.md for detailed version history
 - Pydantic v2 migration completed
 - Enhanced error handling and logging
@@ -653,8 +711,6 @@ pip install -e .
 
 ---
 
-**This project is part of the Sigma5C infrastructure. For cluster-wide information, see /home/candc/CLAUDE.md**
+This project is part of the Sigma5C infrastructure. For cluster-wide information, see `/home/candc/CLAUDE.md`.
 
-*Last Updated: November 5, 2025*
-*Document Version: 1.0*
-*Status: Active development and deployment*
+Last Updated: March 2, 2026 | Document Version: 1.1 | Status: Active development and deployment
