@@ -1,8 +1,4 @@
-"""
-Path management utilities for Enhanced Folder Manager.
-
-License: Sigma5C Corp. Copyright 2024 - 2025
-"""
+"""Path management utilities for Master Folder Manager."""
 
 import json
 import os
@@ -16,7 +12,7 @@ DEV_PATHS = {
         "/Volumes/Seagate_2",
         "/Volumes/Seagate",
         "/Volumes/MongoDB",
-        "/Volumes/Sigma5C Corp.",
+        "/Volumes/ExternalDrive",
         "/Volumes/Willie",
         "/Volumes/One Touch",
         "/Volumes/4 TB Monty"

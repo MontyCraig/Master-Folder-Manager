@@ -578,8 +578,4 @@ This document is licensed under the Apache License, Version 2.0. You may obtain 
 
 ## License
 
-Copyright © 2024-2025 Sigma5C Corp. All rights reserved.
-
-This is proprietary software. Unauthorized copying, modification, distribution,
-or use of this software, via any medium, is strictly prohibited without the
-express written permission of Sigma5C Corp.
+MIT License. Copyright 2024-2026 Monty Craig. See LICENSE for details.

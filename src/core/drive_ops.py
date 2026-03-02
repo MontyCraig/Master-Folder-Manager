@@ -1,8 +1,4 @@
-"""
-Drive operations module for Enhanced Folder Manager.
-
-License: Sigma5C Corp. Copyright 2024 - 2025
-"""
+"""Drive operations module for Master Folder Manager."""
 
 import psutil
 import os

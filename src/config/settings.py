@@ -1,8 +1,4 @@
-"""
-Configuration settings for Enhanced Folder Manager.
-
-License: Sigma5C Corp. Copyright 2024 - 2025
-"""
+"""Configuration settings for Master Folder Manager."""
 
 from pathlib import Path
 import json
@@ -22,7 +18,7 @@ DEFAULT_CONFIG = {
         "/Volumes/Seagate_2",
         "/Volumes/Seagate",
         "/Volumes/MongoDB",
-        "/Volumes/Sigma5C Corp.",
+        "/Volumes/ExternalDrive",
         "/Volumes/Willie",
         "/Volumes/One Touch",
         "/Volumes/4 TB Monty"

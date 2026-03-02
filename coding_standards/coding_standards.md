@@ -2,13 +2,7 @@
 
 This document outlines the coding standards and best practices to be followed for all projects developed within our team. Adhering to these guidelines ensures consistency, maintainability, and high-quality code across all projects.
 
-We are the software company Sigma5C Corp. so all liceneces are attributed :
-
-License
-
-Sigma5C Corp. Copyright 2024 - 2025
-
-Unless otherwise noted
+All contributions are licensed under the MIT License unless otherwise noted.
 
 ## **Table of Contents**
 

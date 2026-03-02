@@ -1,5 +1,1 @@
-"""
-Configuration module for Enhanced Folder Manager.
-
-License: Sigma5C Corp. Copyright 2024 - 2025
-"""
+"""Configuration module for Master Folder Manager."""

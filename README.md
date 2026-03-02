@@ -2,7 +2,7 @@
 
 A professional-grade CLI tool for organizing and managing files across multiple drives and volumes.
 
-License: Sigma5C Corp. Copyright 2024 - 2026
+Licensed under the MIT License
 
 ## Overview
 
@@ -159,4 +159,4 @@ python -m pytest tests/core/test_models.py
 
 ## License
 
-Sigma5C Corp. Copyright 2024 - 2026
+MIT License. Copyright 2024-2026 Monty Craig. See [LICENSE](LICENSE) for details.

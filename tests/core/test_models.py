@@ -1,7 +1,7 @@
 """Tests for data models."""
 
 import pytest
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from pydantic import ValidationError
 from src.core.models import (
@@ -17,7 +17,7 @@ class TestFileInfo:
     
     def test_valid_file_info(self):
         """Test creation of valid FileInfo instance."""
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         info = FileInfo(
             name="test.txt",
             path="/home/user/test.txt",
@@ -42,7 +42,7 @@ class TestFileInfo:
                 name="invalid/name.txt",
                 path="/home/user/test.txt",
                 size=1024,
-                modified=datetime.utcnow(),
+                modified=datetime.now(timezone.utc),
                 is_dir=False,
                 is_file=True
             )
@@ -55,7 +55,7 @@ class TestFileInfo:
                 name="test*.txt",
                 path="/home/user/test.txt",
                 size=1024,
-                modified=datetime.utcnow(),
+                modified=datetime.now(timezone.utc),
                 is_dir=False,
                 is_file=True
             )
@@ -70,7 +70,7 @@ class TestFileInfo:
                 name="test.txt",
                 path="../invalid/path",
                 size=1024,
-                modified=datetime.utcnow(),
+                modified=datetime.now(timezone.utc),
                 is_dir=False,
                 is_file=True
             )
@@ -85,7 +85,7 @@ class TestFileInfo:
                 name="test.txt",
                 path="/home/user/test.txt",
                 size=-1,
-                modified=datetime.utcnow(),
+                modified=datetime.now(timezone.utc),
                 is_dir=False,
                 is_file=True
             )
@@ -275,4 +275,127 @@ class TestCategoryConfig:
                 description="a" * 501
             )
         error_dict = exc_info.value.errors()
-        assert any("at most 200 characters" in err["msg"] for err in error_dict) 
+        assert any("at most 200 characters" in err["msg"] for err in error_dict)
+
+
+class TestFileInfoEdgeCases:
+    """Additional edge case tests for FileInfo model."""
+
+    def test_model_dump_serializes_datetime(self):
+        """Test that model_dump converts datetime to ISO format."""
+        now = datetime.now(timezone.utc)
+        info = FileInfo(
+            name="test.txt",
+            path="/home/user/test.txt",
+            size=100,
+            modified=now,
+            is_dir=False,
+            is_file=True,
+        )
+        dumped = info.model_dump()
+        assert isinstance(dumped["modified"], str)
+
+    def test_path_normalized(self):
+        """Test that paths are normalized."""
+        info = FileInfo(
+            name="test.txt",
+            path="/home/user/./docs/../test.txt",
+            size=100,
+            modified=datetime.now(timezone.utc),
+            is_dir=False,
+            is_file=True,
+        )
+        assert ".." not in info.path
+
+    def test_relative_path_rejected(self):
+        """Test that relative paths are rejected."""
+        with pytest.raises(ValidationError):
+            FileInfo(
+                name="test.txt",
+                path="relative/path/test.txt",
+                size=100,
+                modified=datetime.now(timezone.utc),
+                is_dir=False,
+                is_file=True,
+            )
+
+    def test_empty_name_rejected(self):
+        """Test that empty names are rejected."""
+        with pytest.raises(ValidationError):
+            FileInfo(
+                name="",
+                path="/home/user/test.txt",
+                size=0,
+                modified=datetime.now(timezone.utc),
+                is_dir=False,
+                is_file=True,
+            )
+
+    def test_whitespace_name_rejected(self):
+        """Test that names with leading/trailing whitespace are rejected."""
+        with pytest.raises(ValidationError):
+            FileInfo(
+                name=" test.txt ",
+                path="/home/user/test.txt",
+                size=0,
+                modified=datetime.now(timezone.utc),
+                is_dir=False,
+                is_file=True,
+            )
+
+
+class TestFileOperationEdgeCases:
+    """Additional tests for FileOperation model."""
+
+    def test_path_serialization_in_model_dump(self):
+        """Test that Path objects are serialized in model_dump."""
+        from pathlib import Path as P
+
+        op = FileOperation(success=True, result=P("/some/path"))
+        dumped = op.model_dump()
+        assert dumped["result"] == "/some/path"
+
+
+class TestFileHashEdgeCases:
+    """Additional edge case tests for FileHash."""
+
+    def test_hash_length_mismatch_for_sha256(self):
+        """Test that wrong-length hash for sha256 is rejected."""
+        with pytest.raises(ValidationError):
+            FileHash(
+                algorithm="sha256",
+                hash_value="abcdef1234567890" * 2,  # 32 chars, needs 64
+                file_path="/path/to/file.txt",
+            )
+
+
+class TestCategoryConfigEdgeCases:
+    """Additional edge case tests for CategoryConfig."""
+
+    def test_non_list_extensions_rejected(self):
+        """Test that non-list extensions value is rejected."""
+        with pytest.raises(ValidationError):
+            CategoryConfig(
+                name="test",
+                extensions="not a list",
+            )
+
+    def test_non_string_extension_in_list_rejected(self):
+        """Test that non-string items in extensions list are rejected."""
+        with pytest.raises(ValidationError):
+            CategoryConfig(
+                name="test",
+                extensions=[123, 456],
+            )
+
+
+class TestFileOperationModelDumpPath:
+    """Test FileOperation.model_dump with Path objects."""
+
+    def test_model_dump_does_not_contain_path_object(self):
+        """Test model_dump serializes any remaining Path objects."""
+        # The field_validator already converts Path to str,
+        # but model_dump has a fallback check
+        op = FileOperation(success=True, result="/some/path")
+        dumped = op.model_dump()
+        assert isinstance(dumped["result"], str)

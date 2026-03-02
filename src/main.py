@@ -1,8 +1,4 @@
-"""
-Interactive CLI interface for Master Folder Manager.
-
-License: Sigma5C Corp. Copyright 2024 - 2025
-"""
+"""Interactive CLI interface for Master Folder Manager."""
 
 import click
 from pathlib import Path

@@ -236,4 +236,106 @@ def test_get_file_hash(tmp_path):
     dir_path.mkdir()
     result = get_file_hash(dir_path)
     assert result.success is False
-    assert "not a file" in result.error_message 
+    assert "not a file" in result.error_message
+
+
+def test_validate_path_with_string():
+    """Test validate_path converts string to resolved Path."""
+    from src.core.file_ops import validate_path
+
+    result = validate_path("/tmp")
+    assert isinstance(result, Path)
+    assert result.is_absolute()
+
+
+def test_validate_path_with_invalid_input():
+    """Test validate_path raises ValueError for invalid input."""
+    from src.core.file_ops import validate_path
+
+    with pytest.raises(ValueError, match="Invalid path"):
+        validate_path("\x00invalid")
+
+
+def test_safe_move_file_existing_dest_no_overwrite(tmp_path):
+    """Test safe_move_file refuses to overwrite without flag."""
+    source = tmp_path / "src.txt"
+    source.write_text("source")
+    dest = tmp_path / "dst.txt"
+    dest.write_text("existing")
+
+    result = safe_move_file(source, dest, overwrite=False)
+    assert not result.success
+    assert "already exists" in result.error_message
+
+
+def test_safe_copy_file_nonexistent_source(tmp_path):
+    """Test safe_copy_file with nonexistent source."""
+    result = safe_copy_file(tmp_path / "nope.txt", tmp_path / "dest.txt")
+    assert not result.success
+    assert "does not exist" in result.error_message
+
+
+def test_delete_file_nonexistent():
+    """Test delete_file with nonexistent path."""
+    result = delete_file(Path("/nonexistent/file.txt"))
+    assert not result.success
+    assert "does not exist" in result.error_message
+
+
+def test_rename_file_with_backslash_separator(tmp_path):
+    """Test rename_file rejects names with backslash."""
+    f = tmp_path / "test.txt"
+    f.write_text("content")
+    result = rename_file(f, "folder\\file.txt")
+    assert result.success is False
+    assert "separators" in result.error_message
+
+
+def test_secure_delete_handles_write_error(tmp_path, monkeypatch):
+    """Test delete_file handles error during secure overwrite."""
+    target = tmp_path / "secret.txt"
+    target.write_text("sensitive data")
+
+    original_open = open
+
+    def broken_open(path, mode='r', *args, **kwargs):
+        if mode == 'wb' and str(path) == str(target):
+            raise PermissionError("Cannot write")
+        return original_open(path, mode, *args, **kwargs)
+
+    monkeypatch.setattr("builtins.open", broken_open)
+
+    # Should still delete the file even if secure wipe fails
+    result = delete_file(target, secure=True)
+    assert result.success
+    assert not target.exists()
+
+
+def test_rename_file_unexpected_exception(tmp_path):
+    """Test rename_file handles unexpected OS errors."""
+    from unittest.mock import patch
+
+    target = tmp_path / "test.txt"
+    target.write_text("content")
+
+    with patch.object(Path, "rename", side_effect=OSError("Filesystem error")):
+        result = rename_file(target, "new_name.txt")
+        assert not result.success
+
+
+def test_get_file_hash_unexpected_exception(tmp_path, monkeypatch):
+    """Test get_file_hash handles unexpected read errors."""
+    target = tmp_path / "test.txt"
+    target.write_text("content")
+
+    original_open = open
+
+    def broken_open(path, mode='r', *args, **kwargs):
+        if mode == 'rb' and str(path) == str(target):
+            raise IOError("Disk error")
+        return original_open(path, mode, *args, **kwargs)
+
+    monkeypatch.setattr("builtins.open", broken_open)
+
+    result = get_file_hash(target)
+    assert not result.success

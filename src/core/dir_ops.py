@@ -1,8 +1,4 @@
-"""
-Directory operations module for Enhanced Folder Manager.
-
-License: Sigma5C Corp. Copyright 2024 - 2025
-"""
+"""Directory operations module for Master Folder Manager."""
 
 from pathlib import Path
 from typing import Dict, List, Any, Optional
