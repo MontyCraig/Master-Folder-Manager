@@ -30,7 +30,7 @@ pip install enhanced-folder-manager
 ### From source
 
 ```bash
-git clone <<<https://github.com/MontyCraig/Master-Folder-Manager.git>>>
+git clone https://github.com/MontyCraig/Master-Folder-Manager.git
 cd master-folder-manager
 
 # Create a virtual environment (recommended)
@@ -226,7 +226,7 @@ efm rename "*.jpg" "vacation_{n}.jpg"
 
 - Check the [FAQ](./faq.md) for common questions
 
-- Visit our [GitHub Issues](<<<https://github.com/yourusername/master-folder-manager/issues)>>> page
+- Visit our [GitHub Issues](https://github.com/yourusername/master-folder-manager/issues) page
 
 - Join our community on [Discord/Slack]
 

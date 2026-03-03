@@ -74,7 +74,7 @@ The Enhanced Folder Manager is a robust Python application for efficient file or
 
 ## Project Status
 
-Current Version: 1.0.0
+Current Version: 2.0.0
 Status: Active Development
 
 ## Support

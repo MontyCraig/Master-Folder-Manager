@@ -394,7 +394,7 @@ services:
       - kafka
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "<<<http://localhost:8000/health"]>>>
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -764,4 +764,4 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at http://www.apache.org/licenses/LICENSE-2.0.

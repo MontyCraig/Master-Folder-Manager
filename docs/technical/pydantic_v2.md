@@ -209,8 +209,8 @@ Our test suite has been updated to handle Pydantic v2's error messages. Key chan
 
 ## Additional Resources
 
-- [Pydantic v2 Documentation](<<<https://docs.pydantic.dev/latest/)>>>
+- [Pydantic v2 Documentation](https://docs.pydantic.dev/latest/)
 
-- [Migration Guide](<<<https://docs.pydantic.dev/latest/migration/)>>>
+- [Migration Guide](https://docs.pydantic.dev/latest/migration/)
 
-- [API Reference](<<<https://docs.pydantic.dev/latest/api/)>>>
+- [API Reference](https://docs.pydantic.dev/latest/api/)

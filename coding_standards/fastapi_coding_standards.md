@@ -106,7 +106,7 @@ from typing import Optional, Dict, Any
 class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "FastAPI Project"
-    BACKEND_CORS_ORIGINS: list[str] = ["<<<http://localhost:3000"]>>>
+    BACKEND_CORS_ORIGINS: list[str] = ["http://localhost:3000"]
 
     POSTGRES_SERVER: str
     POSTGRES_USER: str
@@ -572,7 +572,7 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at http://www.apache.org/licenses/LICENSE-2.0.
 
 ```text
 

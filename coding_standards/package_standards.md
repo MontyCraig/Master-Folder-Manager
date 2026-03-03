@@ -149,10 +149,10 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "<<<https://github.com/username/package-name">>>
-Documentation = "<<<https://package-name.readthedocs.io/">>>
-Repository = "<<<https://github.com/username/package-name.git">>>
-Changelog = "<<<https://github.com/username/package-name/blob/main/CHANGELOG.md">>>
+Homepage = "https://github.com/username/package-name"
+Documentation = "https://package-name.readthedocs.io/"
+Repository = "https://github.com/username/package-name.git"
+Changelog = "https://github.com/username/package-name/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/package_name"]
@@ -180,7 +180,7 @@ pre-commit==3.5.0
 
 repos:
 
--   repo: <<<https://github.com/pre-commit/pre-commit-hooks>>>
+-   repo: https://github.com/pre-commit/pre-commit-hooks
 
     rev: v4.5.0
     hooks:
@@ -192,13 +192,13 @@ repos:
 
     -   id: check-added-large-files
 
--   repo: <<<https://github.com/psf/black>>>
+-   repo: https://github.com/psf/black
 
     rev: 23.10.0
     hooks:
     -   id: black
 
--   repo: <<<https://github.com/charliermarsh/ruff-pre-commit>>>
+-   repo: https://github.com/charliermarsh/ruff-pre-commit
 
     rev: v0.1.3
     hooks:
@@ -206,7 +206,7 @@ repos:
 
         args: [--fix]
 
--   repo: <<<https://github.com/pre-commit/mirrors-mypy>>>
+-   repo: https://github.com/pre-commit/mirrors-mypy
 
     rev: v1.6.1
     hooks:
@@ -582,7 +582,7 @@ result = main_function()
 
 # Clone the repository
 
-git clone <<<https://github.com/username/package-name.git>>>
+git clone https://github.com/username/package-name.git
 cd package-name
 
 # Create virtual environment
@@ -617,7 +617,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at <<<http://www.apache.org/licenses/LICENSE-2.0.>>>
+This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at http://www.apache.org/licenses/LICENSE-2.0.
 
 ## Conclusion
 

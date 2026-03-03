@@ -57,17 +57,20 @@ pip install -e .
 
 ```bash
 # Start the interactive interface
-efm
+python -m src.main
 
-# Analyze a directory
-efm analyze ~/Documents
-
-# Organize files by category
-efm organize ~/Downloads --by-category
-
-# Show help
-efm --help
+# Or, after installing in development mode:
+mfm
 ```
+
+The interactive menu provides options for:
+
+- Listing directory contents
+- Analyzing directories (size, extensions, categories)
+- Creating and managing master folders
+- Organizing files by category (move or copy)
+- Browsing volumes
+- Viewing directory trees
 
 ## Project Structure
 
@@ -87,13 +90,13 @@ master-folder-manager/
 
 ## Configuration
 
-The tool maintains configuration in `~/.config/efm/config.yaml` including:
+Configuration is stored in `~/.efm_config.json` and includes:
 
-- Master folder locations
+- Master folder root location
 - Quick access volumes
-- File categories
+- File categories with extensions and priorities
 - Recent paths
-- User preferences
+- Excluded patterns (e.g., `.git`, `__pycache__`, `node_modules`)
 
 ## Development
 
@@ -108,24 +111,28 @@ cd Master-Folder-Manager
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 
-# Install development dependencies
-pip install -r requirements.txt
+# Install with development dependencies
+pip install -e ".[dev]"
 
-# Run tests
+# Install pre-commit hooks
+pre-commit install
+
+# Verify setup
 python -m pytest
 ```
 
 ### Running Tests
 
 ```bash
-# Run all tests
-python -m pytest
-
-# Run with coverage report
-python -m pytest --cov=src
+# Run all tests with coverage
+python -m pytest --cov=src --cov-report=term-missing
 
 # Run specific test file
-python -m pytest tests/core/test_models.py
+python -m pytest tests/core/test_models.py -v
+
+# Run linting and type checks
+ruff check src/ tests/
+mypy src/
 ```
 
 ## Development Status
