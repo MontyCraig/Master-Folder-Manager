@@ -852,4 +852,4 @@ Remember to:
 
 ## License
 
-This document is licensed under the Apache License, Version 2.0. You may obtain a copy of the license at http://www.apache.org/licenses/LICENSE-2.0.
+This document is licensed under the MIT License. See [LICENSE](../LICENSE) for details.
