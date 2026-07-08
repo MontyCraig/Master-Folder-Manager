@@ -1,12 +1,16 @@
 """Setup file for Master Folder Manager."""
 
-from setuptools import setup, find_packages
+from pathlib import Path
+
+from setuptools import find_packages, setup
+
+README = Path(__file__).with_name("README.md")
 
 setup(
     name="master-folder-manager",
     version="2.0.0",
     description="Professional-grade CLI tool for organizing and managing files across multiple drives",
-    long_description=open("README.md").read(),
+    long_description=README.read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",
     author="Monty Craig",
     author_email="montycraig@users.noreply.github.com",
@@ -14,7 +18,8 @@ setup(
     license="MIT",
     packages=find_packages(),
     install_requires=[
-        "click>=8.0.0",
+        "click>=8.1.8,<8.2; python_version < '3.10'",
+        "click>=8.4.2; python_version >= '3.10'",
         "pathlib>=1.0.1",
         "rich>=13.0.0",
         "pydantic>=2.0.0",
