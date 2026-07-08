@@ -1,12 +1,14 @@
 # Core dependencies
-click>=8.1.8
+click>=8.1.8,<8.2; python_version < "3.10"
+click>=8.4.2; python_version >= "3.10"
 pathlib>=1.0.1
 rich>=15.0.0
 pydantic>=2.13.4
 psutil>=7.2.2
 
 # Testing
-pytest>=8.4.2
+pytest>=8.4.2,<9; python_version < "3.10"
+pytest>=9.1.1; python_version >= "3.10"
 pytest-cov>=7.1.0
 
 # Type checking
